@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SM2ARTA™ — Platform Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E50D28;
+    --ink: #1A1A1A;
+    --muted: #707070;
+    --line: #E5E5E5;
+    --tint: #FCE6E9;
+    --bg-alt: #FAFAFA;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #EDEDED; font-family: 'DM Sans', sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet {
+    width: 8.5in; height: 11in;
+    background: #FFFFFF;
+    margin: 16px auto; padding: 0.5in 0.7in 0.7in;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    page-break-after: always;
+    break-after: page;
+    position: relative;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    overflow: hidden;
+  }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
+
+  /* Header / Footer */
+  .page-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 14px;
+  }
+  .page-header .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark { font-size: 14pt; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); }
+  .brand-mark sup { font-size: 0.6em; font-weight: 700; color: var(--red); vertical-align: super; }
+  .brand-mark sup.tm { color: var(--muted); font-size: 0.45em; margin-left: 2px; font-weight: 600; }
+  .accent { width: 26px; height: 3px; background: var(--red); }
+  .year { font-size: 9pt; color: var(--ink); font-weight: 500; letter-spacing: 0.06em; }
+  .doc-tag { font-size: 8.5pt; color: var(--muted); letter-spacing: 0.2em; font-weight: 700; text-transform: uppercase; }
+
+  .page-footer {
+    position: absolute; left: 0.7in; right: 0.7in; bottom: 0.38in;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 6px; border-top: 1px solid var(--line);
+    font-size: 8pt; color: var(--muted); letter-spacing: 0.04em;
+  }
+  .page-footer .pagenum { color: var(--ink); font-weight: 700; }
+
+  /* Typography */
+  h1, h2, h3 { margin: 0; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
+  h1 { font-size: 24pt; line-height: 1.05; }
+  h1 .red { color: var(--red); }
+  h2 { font-size: 13pt; margin-top: 10px; margin-bottom: 5px; }
+  h2 .red { color: var(--red); }
+  h3 { font-size: 10.5pt; margin-bottom: 3px; }
+  .eyebrow { font-size: 7.5pt; color: var(--red); font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 3px; }
+  .lede { font-size: 9.5pt; color: var(--ink); line-height: 1.5; }
+  .muted { color: var(--muted); }
+  p { margin: 0 0 6px; font-size: 9pt; line-height: 1.45; }
+  strong { color: var(--ink); font-weight: 700; }
+  .rule-red { height: 3px; width: 48px; background: var(--red); margin: 6px 0 10px; }
+  hr.divider { border: 0; height: 1px; background: var(--line); margin: 10px 0; }
+
+  /* Cover */
+  .cover { padding-top: 6px; }
+  .cover figure { margin: 10px 0 6px; }
+  .cover .shot img { max-height: 1.7in; object-fit: contain; background: #FAFAFA; }
+  .cover .kicker { font-size: 8.5pt; color: var(--red); letter-spacing: 0.3em; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+  .cover h1 { font-size: 34pt; line-height: 1.0; letter-spacing: -0.02em; }
+  .cover .subtitle { font-size: 10.5pt; color: var(--muted); font-weight: 500; margin-top: 8px; line-height: 1.35; }
+
+  .cover-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .stat { border: 1px solid var(--line); padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--red); }
+  .stat-num { font-size: 16pt; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+  .stat-label { font-size: 7.5pt; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+
+  /* Role cards */
+  .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+  .role-card { border: 1px solid var(--line); border-radius: 6px; padding: 10px; background: var(--bg-alt); border-top: 3px solid var(--red); }
+  .role-card .role-num { font-size: 7pt; color: var(--red); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2px; }
+  .role-card .role-name { font-size: 10pt; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
+  .role-card .role-desc { font-size: 8.5pt; color: var(--muted); line-height: 1.35; }
+
+  /* Feature row */
+  .feature { display: grid; grid-template-columns: 32px 1fr; gap: 8px; margin-bottom: 5px; align-items: start; }
+  .feature .chip { width: 24px; height: 24px; border-radius: 5px; background: var(--tint); color: var(--red); font-weight: 800; font-size: 10pt; display: flex; align-items: center; justify-content: center; line-height: 1; }
+  .feature .label { font-weight: 700; color: var(--ink); font-size: 9.5pt; margin-bottom: 1px; }
+  .feature .desc { font-size: 8.5pt; color: var(--muted); line-height: 1.35; }
+
+  /* Callout */
+  .callout { background: var(--bg-alt); border-left: 4px solid var(--red); padding: 8px 12px; border-radius: 4px; margin: 8px 0; font-size: 9pt; line-height: 1.45; }
+  .callout .callout-label { font-size: 7pt; color: var(--red); letter-spacing: 0.2em; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
+
+  /* Two-col bullets */
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 14px; margin: 4px 0 2px; }
+  .twocol .item { display: flex; align-items: flex-start; gap: 6px; font-size: 8.5pt; color: var(--ink); padding: 2px 0; }
+  .twocol .item::before { content: ''; flex: 0 0 auto; width: 4px; height: 4px; background: var(--red); border-radius: 50%; margin-top: 6px; }
+
+  /* What's New cards — compact */
+  .new-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .new-card { border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; background: var(--bg-alt); border-left: 3px solid var(--red); }
+  .new-card .num { font-size: 7pt; color: var(--red); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 4px; }
+  .new-card .t { font-size: 11pt; font-weight: 800; margin-bottom: 4px; }
+  .new-card .d { font-size: 9pt; color: var(--muted); line-height: 1.45; }
+  .new-card.hero { border-top: 3px solid var(--red); border-left: 1px solid var(--line); background: #FFFFFF; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+
+  /* Why-page fig cap shorter so Next Steps + CTA fit */
+  .why-fig .shot img { max-height: 1.5in; }
+
+  /* Next steps block */
+  .next-steps { margin-top: 14px; }
+  .ns-eyebrow { font-size: 8pt; color: var(--red); letter-spacing: 0.22em; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+  .ns-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ns-item { border: 1px solid var(--line); border-radius: 6px; padding: 12px; background: var(--bg-alt); border-top: 3px solid var(--red); }
+  .ns-num { font-size: 16pt; font-weight: 800; color: var(--red); letter-spacing: -0.02em; line-height: 1; margin-bottom: 4px; }
+  .ns-t { font-size: 10pt; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
+  .ns-d { font-size: 8.5pt; color: var(--muted); line-height: 1.4; }
+
+  /* CTA strip — compact */
+  .cta-strip { background: var(--ink); color: #FFFFFF; padding: 12px 16px; border-radius: 6px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+  .cta-strip .cta-text { font-size: 9pt; font-weight: 500; }
+  .cta-strip .cta-url { background: var(--red); color: #FFFFFF; padding: 6px 12px; border-radius: 5px; font-weight: 700; font-size: 9pt; }
+
+  /* Screenshot frames — capped heights so each sheet fits Letter */
+  figure { margin: 8px 0; }
+  .shot { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .shot .browser-bar { background: #F5F5F5; padding: 4px 8px; display: flex; align-items: center; gap: 5px; border-bottom: 1px solid var(--line); }
+  .shot .browser-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: #D4D4D4; }
+  .shot .browser-bar .dot.red { background: var(--red); }
+  .shot .browser-bar .url { margin-left: 6px; font-size: 7pt; color: var(--muted); letter-spacing: 0.04em; }
+  .shot img { display: block; width: 100%; height: auto; max-height: 2.1in; object-fit: cover; object-position: top; }
+  figcaption { font-size: 7.5pt; color: var(--muted); letter-spacing: 0.06em; margin-top: 3px; font-weight: 500; text-align: center; }
+  figcaption .tag { color: var(--red); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-right: 5px; }
+
+  .shot-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .shot-grid-2 .shot img { max-height: 1.4in; }
+  .shot-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .shot-grid-3 .shot img { max-height: 1.1in; }
+  .split { display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; align-items: start; }
+  .split .shot img { max-height: 1.5in; }
+
+  /* Page 4 VLM — taller figures to fill the page */
+  .vlm-grid .shot img { max-height: 1.7in; }
+  .vlm-paperwork { margin-top: 14px; align-items: stretch; }
+  .vlm-paperwork .shot img { max-height: 2in; object-fit: cover; object-position: top; }
+
+  .cta-strip .cta-text strong { color: #FFFFFF; font-weight: 700; }
+
+  /* Screen-only toolbar */
+  .toolbar { position: fixed; top: 16px; right: 16px; z-index: 100; background: var(--red); color: #FFFFFF; border: none; padding: 10px 16px; border-radius: 6px; font-family: inherit; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; box-shadow: 0 4px 12px rgba(229, 13, 40, 0.3); display: flex; align-items: center; gap: 8px; }
+  .toolbar:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(229, 13, 40, 0.4); }
+  .back-link { position: fixed; top: 16px; left: 16px; z-index: 100; background: #FFFFFF; color: var(--ink); text-decoration: none; border: 1px solid var(--line); padding: 10px 14px; border-radius: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; }
+
+  /* Print */
+  @page { size: letter; margin: 0; }
+  @media print {
+    html, body { background: #FFFFFF; }
+    .sheet { margin: 0; box-shadow: none; page-break-after: always; break-after: page; width: 8.5in; height: 11in; padding: 0.5in 0.7in 0.7in; overflow: hidden; }
+    .toolbar, .back-link { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<button class="toolbar" onclick="window.print()"><span>SAVE AS PDF</span></button>
+<a class="back-link" href="index.html">← BACK TO PRESENTATION</a>
+
+<!-- ================== PAGE 1 : COVER + OVERVIEW ================== -->
+<section class="sheet">
+  <div class="page-header">
+    <div class="brand"><span class="brand-mark">SM<sup>2</sup>ARTA<sup class="tm">™</sup></span><span class="accent"></span><span class="year">2026</span></div>
+    <span class="doc-tag">Platform Overview · Document</span>
+  </div>
+
+  <div class="cover">
+    <div class="kicker">Enterprise Platform</div>
+    <h1>SM<sup style="font-size:0.55em;color:var(--red);">2</sup>ARTA<sup style="font-size:0.4em;color:var(--muted);font-weight:600;margin-left:4px">™</sup><br><span class="red">Overview</span></h1>
+    <div class="subtitle">Event Material Planning &amp; Asset Tracking — built for large-scale sport events, proven at a major international football tournament, evolved for the next.</div>
+    <div class="rule-red"></div>
+
+    <p class="lede"><strong>SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA<sup style="font-size:0.55em;color:var(--muted);font-weight:600;margin-left:2px">™</sup></strong> is a multiuser, web-based platform accessible from any device connected to the Internet. There is no client software to install, no limit on the number of users, events, venues, or catalogued items, and a learning curve measured in minutes.</p>
+
+    <figure>
+      <div class="shot">
+        <div class="browser-bar"><span class="dot red"></span><span class="dot"></span><span class="dot"></span><span class="url">https://demo.smmarta.com</span></div>
+        <img src="overview_media/image1.jpeg" alt="SM2ARTA login / splash">
+      </div>
+      <figcaption><span class="tag">Fig. 01</span>Platform entry point — any device, any browser, zero install</figcaption>
+    </figure>
+
+    <div class="cover-stats">
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Role Interfaces</div></div>
+      <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Years in Production</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Users · Events · SKUs</div></div>
+    </div>
+
+    <h2 style="margin-top:14px">Three <span class="red">Collaborative Roles</span></h2>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-num">Role 01</div>
+        <div class="role-name">Material Planning Manager</div>
+        <div class="role-desc">Administrative control of events, catalogs, users, and settings. Oversees the full planning lifecycle.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-num">Role 02</div>
+        <div class="role-name">Functional Material Planner</div>
+        <div class="role-desc">Streamlined interface for functional teams. As intuitive as online shopping — ready in minutes.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-num">Role 03</div>
+        <div class="role-name">Venue Logistics Manager</div>
+        <div class="role-desc">Bump-in planning, delivery control, real-time inventory, automated paperwork.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>SM<sup>2</sup>ARTA™ · Platform Overview</span><span>Page <span class="pagenum">01</span></span></div>
+</section>
+
+<!-- ================== PAGE 2 : MATERIAL PLANNING MANAGER ================== -->
+<section class="sheet">
+  <div class="page-header">
+    <div class="brand"><span class="brand-mark">SM<sup>2</sup>ARTA<sup class="tm">™</sup></span><span class="accent"></span><span class="year">2026</span></div>
+    <span class="doc-tag">Role 01 · Administration</span>
+  </div>
+
+  <div class="eyebrow">Role 01 · Administration</div>
+  <h1 style="font-size:22pt">Material Planning <span class="red">Manager</span></h1>
+  <div class="rule-red"></div>
+
+  <p class="lede">The Material Planning Manager (MPM) interface provides <strong>comprehensive administrative access</strong> to every SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA feature. The home dashboard surfaces live system activity and active-event status at a glance.</p>
+
+  <figure>
+    <div class="shot">
+      <div class="browser-bar"><span class="dot red"></span><span class="dot"></span><span class="dot"></span><span class="url">demo.smmarta.com / manager / dashboard</span></div>
+      <img src="overview_media/image3.jpeg" alt="MPM home dashboard">
+    </div>
+    <figcaption><span class="tag">Fig. 02</span>MPM home dashboard — latest activity and event overview</figcaption>
+  </figure>
+
+  <h2>Directory &amp; Content Creation</h2>
+  <p>Build the system's content through the <strong>Directory</strong> section: start by adding users, then venues and spaces, then the FF&amp;E catalog — all through one consistent interface, without developer support.</p>
+
+  <div class="split">
+    <div>
+      <div class="feature">
+        <div class="chip">1</div>
+        <div><div class="label">Unlimited scale</div><div class="desc">No restriction on users, events, venues, spaces, or catalog items.</div></div>
+      </div>
+      <div class="feature">
+        <div class="chip">2</div>
+        <div><div class="label">Self-serve configuration</div><div class="desc">Change the data model directly — no tickets, no downtime.</div></div>
+      </div>
+      <div class="feature">
+        <div class="chip">3</div>
+        <div><div class="label">Per-event tailoring</div><div class="desc">Unique Venues, Spaces, and FF&amp;E catalogues for every event.</div></div>
+      </div>
+    </div>
+    <figure style="margin:0">
+      <div class="shot"><img src="overview_media/image4.webp" alt="Directory section"></div>
+      <figcaption><span class="tag">Fig. 03</span>Directory — users, venues, catalog</figcaption>
+    </figure>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Beyond FF&amp;E</div>
+    Need to plan more than furniture, fixtures &amp; equipment? <strong>Golf Carts, Sports Equipment, IT hardware, Signage, Consumables</strong> — anything you can catalog, SM<sup>2</sup>ARTA can plan, order, and track.
+  </div>
+
+  <div class="page-footer"><span>SM<sup>2</sup>ARTA™ · Platform Overview</span><span>Page <span class="pagenum">02</span></span></div>
+</section>
+
+<!-- ================== PAGE 3 : FUNCTIONAL MATERIAL PLANNER ================== -->
+<section class="sheet">
+  <div class="page-header">
+    <div class="brand"><span class="brand-mark">SM<sup>2</sup>ARTA<sup class="tm">™</sup></span><span class="accent"></span><span class="year">2026</span></div>
+    <span class="doc-tag">Role 02 · Planning</span>
+  </div>
+
+  <div class="eyebrow">Role 02 · Planning</div>
+  <h1 style="font-size:22pt">Functional Material <span class="red">Planner</span></h1>
+  <div class="rule-red"></div>
+
+  <p class="lede">The Functional Material Planner (FMP) interface is <strong>simplified and streamlined</strong> so teams focus on planning, not on learning software. Embedded guides make onboarding a five-minute exercise.</p>
+
+  <figure>
+    <div class="shot">
+      <div class="browser-bar"><span class="dot red"></span><span class="dot"></span><span class="dot"></span><span class="url">demo.smmarta.com / planner</span></div>
+      <img src="overview_media/image9.jpeg" alt="FMP interface">
+    </div>
+    <figcaption><span class="tag">Fig. 05</span>FMP home — focused, guided, ready in five minutes</figcaption>
+  </figure>
+
+  <h2>As Easy as <span class="red">Online Shopping</span></h2>
+  <div class="split">
+    <p>The planning flow mirrors a familiar e-commerce experience. The planner creates the <strong>venues and spaces</strong> they are responsible for, then populates them with the <strong>materials</strong> they need — item by item, space by space. Once every functional team has completed their input, the MPM sees the combined, de-duplicated asset list and exports it to Excel for downstream procurement or contractor hand-off. Lists of several thousand lines are routine.</p>
+    <figure style="margin:0">
+      <div class="shot"><img src="overview_media/image10.jpeg" alt="Planning flow — online shopping style"></div>
+      <figcaption><span class="tag">Fig. 06</span>Planning flow</figcaption>
+    </figure>
+  </div>
+
+  <h2>Productivity Tools</h2>
+  <div class="split">
+    <div class="twocol" style="grid-template-columns:1fr">
+      <div class="item">Duplication of spaces and venues</div>
+      <div class="item">Bulk imports from spreadsheets</div>
+      <div class="item">Requirement reviews &amp; approvals</div>
+      <div class="item">Planning freeze (scope lock)</div>
+      <div class="item">In-line comments &amp; requests</div>
+      <div class="item">Change history &amp; revision tracking</div>
+    </div>
+    <figure style="margin:0">
+      <div class="shot"><img src="overview_media/image12.jpeg" alt="Productivity toolkit"></div>
+      <figcaption><span class="tag">Fig. 07</span>Productivity toolkit in action</figcaption>
+    </figure>
+  </div>
+
+
+  <div class="page-footer"><span>SM<sup>2</sup>ARTA™ · Platform Overview</span><span>Page <span class="pagenum">03</span></span></div>
+</section>
+
+<!-- ================== PAGE 4 : VENUE LOGISTICS MANAGER ================== -->
+<section class="sheet">
+  <div class="page-header">
+    <div class="brand"><span class="brand-mark">SM<sup>2</sup>ARTA<sup class="tm">™</sup></span><span class="accent"></span><span class="year">2026</span></div>
+    <span class="doc-tag">Role 03 · Logistics</span>
+  </div>
+
+  <div class="eyebrow">Role 03 · Logistics</div>
+  <h1 style="font-size:22pt">Venue Logistics <span class="red">Manager</span></h1>
+  <div class="rule-red"></div>
+
+  <p class="lede">The Venue Logistics Manager (VLM) bridges planning and execution. VLMs monitor the progress of functional planners and create the <strong>comprehensive bump-in plans</strong> that coordinate delivery, installation, and operational readiness across every venue.</p>
+
+  <figure>
+    <div class="shot">
+      <div class="browser-bar"><span class="dot red"></span><span class="dot"></span><span class="dot"></span><span class="url">demo.smmarta.com / logistics / bump-in</span></div>
+      <img src="overview_media/image14.jpeg" alt="VLM bump-in interface">
+    </div>
+    <figcaption><span class="tag">Fig. 09</span>VLM bump-in plan builder</figcaption>
+  </figure>
+
+  <h2>Delivery &amp; <span class="red">Inventory Control</span></h2>
+  <div class="shot-grid-2 vlm-grid">
+    <figure style="margin:0">
+      <div class="shot"><img src="overview_media/image15.jpeg" alt="Upcoming deliveries"></div>
+      <figcaption><span class="tag">Fig. 10</span>Upcoming deliveries at a glance</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <div class="shot"><img src="overview_media/image16.jpeg" alt="Real-time inventory"></div>
+      <figcaption><span class="tag">Fig. 11</span>Real-time inventory per warehouse &amp; venue</figcaption>
+    </figure>
+  </div>
+
+  <div class="split vlm-paperwork">
+    <div>
+      <h2 style="margin-top:4px">Automated Paperwork</h2>
+      <p>The most-used operational documents — delivery notes, inventory lists, damage reports — generate in seconds from live data, in the correct format, ready to download or share.</p>
+      <div class="twocol" style="grid-template-columns:1fr">
+        <div class="item">Event Inventory Report</div>
+        <div class="item">Bump-in Reports</div>
+        <div class="item">Damage Reports</div>
+        <div class="item">Boxing &amp; Palletisation lists</div>
+      </div>
+    </div>
+    <figure style="margin:0">
+      <div class="shot"><img src="overview_media/image17.jpeg" alt="Auto-generated documents"></div>
+      <figcaption><span class="tag">Fig. 12</span>One-click document generation</figcaption>
+    </figure>
+  </div>
+
+  <div class="page-footer"><span>SM<sup>2</sup>ARTA™ · Platform Overview</span><span>Page <span class="pagenum">04</span></span></div>
+</section>
+
+<!-- ================== PAGE 5 : WHAT'S NEW FOR 2026 ================== -->
+<section class="sheet">
+  <div class="page-header">
+    <div class="brand"><span class="brand-mark">SM<sup>2</sup>ARTA<sup class="tm">™</sup></span><span class="accent"></span><span class="year">2026</span></div>
+    <span class="doc-tag">New in 2026</span>
+  </div>
+
+  <div class="eyebrow">New in 2026</div>
+  <h1 style="font-size:22pt">Built for the <span class="red">Next Major Events</span></h1>
+  <div class="rule-red"></div>
+
+  <p class="lede">SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA has been extended with five major capabilities delivered specifically for the next large-scale sporting events — cross-venue scale, deeper traceability, real-time integrations, and raised security posture.</p>
+
+  <div class="new-grid">
+    <div class="new-card">
+      <div class="num">Enhancement 01</div>
+      <div class="t">Change Management</div>
+      <div class="d">Full delta tracking across planning cycles with automatic redistribution to venue clusters. Every revision is auditable; nothing is lost between rounds of planning.</div>
+    </div>
+    <div class="new-card">
+      <div class="num">Enhancement 02</div>
+      <div class="t">Nomenclature System</div>
+      <div class="d">Warehouse-trackable item registry linking SKUs to operational spaces. A single source of truth for asset lifecycle tracking from catalog to venue and back.</div>
+    </div>
+    <div class="new-card">
+      <div class="num">Enhancement 03</div>
+      <div class="t">BI Integration API</div>
+      <div class="d">Dedicated WebAPI endpoint per table — secure, real-time data feeds for PowerBI and external analytics stacks. Every operational table is queryable.</div>
+    </div>
+    <div class="new-card">
+      <div class="num">Enhancement 04</div>
+      <div class="t">Enhanced Security</div>
+      <div class="d">CipherSweet / NaCl field-level encryption, HashiCorp Vault key management, and ClamAV file scanning on every upload. Zero plaintext exposure at rest.</div>
+    </div>
+    <div class="new-card hero" style="grid-column: span 2;">
+      <div class="num">Enhancement 05 · Phase 1 Live</div>
+      <div class="t">Handover &amp; eRDS Module</div>
+      <div class="d">Electronic Receipt &amp; Delivery System for structured handover of assets between functional teams and venue logistics. Phase 1 capture is live in production; Phases 2–5 extend the module across reconciliation, returns, damage claims, and post-event disposal reporting.</div>
+    </div>
+  </div>
+
+
+  <div class="page-footer"><span>SM<sup>2</sup>ARTA™ · Platform Overview</span><span>Page <span class="pagenum">05</span></span></div>
+</section>
+
+<!-- ================== PAGE 6 : WHY + CTA ================== -->
+<section class="sheet">
+  <div class="page-header">
+    <div class="brand"><span class="brand-mark">SM<sup>2</sup>ARTA<sup class="tm">™</sup></span><span class="accent"></span><span class="year">2026</span></div>
+    <span class="doc-tag">Why SM2ARTA™</span>
+  </div>
+
+  <div class="eyebrow">Summary</div>
+  <h1 style="font-size:22pt">Why <span class="red">SM<sup style="font-size:0.55em;color:var(--red)">2</sup>ARTA</span></h1>
+  <div class="rule-red"></div>
+
+  <p class="lede">One platform. Three role-tailored interfaces. Zero installation. Proven at major sporting events and extended for 2026 with deeper integrations and enterprise-grade security.</p>
+
+  <div class="twocol" style="margin-top:12px">
+    <div class="item">Zero install · any browser, any device</div>
+    <div class="item">Proven at major sporting events</div>
+    <div class="item">Unlimited users, events &amp; catalogs</div>
+    <div class="item">Evolved for the next major events</div>
+    <div class="item">Three roles, one collaborative platform</div>
+    <div class="item">Enterprise-grade security &amp; hosting</div>
+    <div class="item">PowerBI &amp; BI-API integration ready</div>
+    <div class="item">Automated paperwork &amp; live reporting</div>
+    <div class="item">Handover / eRDS module (Phase 1 live)</div>
+    <div class="item">Full audit trail on every change</div>
+  </div>
+
+  <figure class="why-fig">
+    <div class="shot"><img src="overview_media/image11.jpeg" alt="Excel export / combined list"></div>
+    <figcaption><span class="tag">Fig. 14</span>One-click Excel export — combined asset list across all planners</figcaption>
+  </figure>
+
+  <div class="next-steps">
+    <div class="ns-eyebrow">Next Steps</div>
+    <div class="ns-grid">
+      <div class="ns-item">
+        <div class="ns-num">01</div>
+        <div class="ns-t">Explore the live demo</div>
+        <div class="ns-d">Log in and walk through every role from one browser session.</div>
+      </div>
+      <div class="ns-item">
+        <div class="ns-num">02</div>
+        <div class="ns-t">Book a guided tour</div>
+        <div class="ns-d">Tailored session on scope, scale, and rollout planning.</div>
+      </div>
+      <div class="ns-item">
+        <div class="ns-num">03</div>
+        <div class="ns-t">Scope your deployment</div>
+        <div class="ns-d">Shared plan for data migration, user training, and go-live.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <div class="cta-text"><strong>Walk through the platform live.</strong> Multiuser system for Events Material Planning and Asset Tracking.</div>
+    <div class="cta-url">demo.smmarta.com</div>
+  </div>
+
+  <div class="page-footer"><span>SM<sup>2</sup>ARTA™ · Platform Overview</span><span>Page <span class="pagenum">06</span></span></div>
+</section>
+
+</body>
+</html>
