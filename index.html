@@ -58,7 +58,7 @@
   },
   "creator": {
     "@type": "Organization",
-    "name": "SM2ARTA",
+    "name": "SM2ARTA LLC",
     "url": "https://www.smmarta.com/"
   }
 }
@@ -67,7 +67,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "SM2ARTA",
+  "name": "SM2ARTA LLC",
   "url": "https://www.smmarta.com/",
   "logo": "https://www.smmarta.com/assets/logo.svg",
   "description": "Provider of SM2ARTA™ — event material planning and asset tracking platform.",
@@ -216,7 +216,7 @@
     aspect-ratio: 4 / 3;
     background: var(--bg-alt);
   }
-  .hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .hero-visual img { width: 100%; height: 100%; object-fit: contain; object-position: center; background: var(--white); }
   .hero-badge {
     position: absolute; bottom: 4px; left: 36px; z-index: 2;
     background: var(--white); border: 1px solid var(--line);
@@ -359,8 +359,23 @@
     letter-spacing: 0.08em; cursor: pointer; transition: background 0.15s ease;
   }
   .gate button:hover { background: var(--red-dark); }
-  .gate-msg { font-size: 12px; color: rgba(255,255,255,0.5); margin-left: 10px; }
+  .gate-msg { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 10px; }
   .gate-msg.err { color: var(--red); }
+  .gate-msg.ok { color: #7ee08f; }
+
+  /* Unlocked menu */
+  .gate-menu { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .gate-menu a {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);
+    border-left: 3px solid var(--red);
+    padding: 10px 12px; border-radius: 6px;
+    transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+  }
+  .gate-menu a:hover { background: rgba(229,13,40,0.12); border-color: var(--red); transform: translateX(2px); }
+  .gate-menu .gm-arrow { color: var(--red); font-weight: 700; font-size: 14px; line-height: 1.3; }
+  .gate-menu .gm-t { display: block; color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
+  .gate-menu .gm-d { display: block; color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 500; margin-top: 2px; }
 
   /* Fade-in on scroll */
   [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -644,15 +659,32 @@
       </div>
       <div>
         <h4>Private Access</h4>
-        <form class="gate" onsubmit="return openDeck(event)" aria-label="Private deck access">
+        <form class="gate" id="gate-form" onsubmit="return unlockGate(event)" aria-label="Private access">
           <input type="password" id="gate-pwd" placeholder="Passcode" aria-label="Passcode" autocomplete="off">
-          <button type="submit">VIEW DECK</button>
+          <button type="submit">UNLOCK</button>
         </form>
         <div class="gate-msg" id="gate-msg">Authorized viewers only.</div>
+
+        <nav class="gate-menu" id="gate-menu" hidden aria-label="Private presentations">
+          <a href="deck/" target="_blank" rel="noopener">
+            <span class="gm-arrow">▸</span>
+            <span>
+              <span class="gm-t">FIFA Presentation</span>
+              <span class="gm-d">Internal briefing · Strategic overview</span>
+            </span>
+          </a>
+          <a href="overview.html" target="_blank">
+            <span class="gm-arrow">▸</span>
+            <span>
+              <span class="gm-t">Platform Overview (PDF)</span>
+              <span class="gm-d">Illustrated Letter-size document</span>
+            </span>
+          </a>
+        </nav>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 SM<sup style="font-size:0.6em;color:var(--red)">2</sup>ARTA<sup style="font-size:0.5em;color:rgba(255,255,255,0.4);margin-left:2px">™</sup>. All rights reserved.</span>
+      <span>© 2026 SM<sup style="font-size:0.6em;color:var(--red)">2</sup>ARTA<sup style="font-size:0.5em;color:rgba(255,255,255,0.4);margin-left:2px">™</sup> LLC. All rights reserved.</span>
       <span>Built for event operations. Deployed worldwide.</span>
     </div>
   </div>
@@ -665,18 +697,23 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
-  // Private deck gate
-  function openDeck(ev) {
+  // Private access gate — passcode unlocks a menu of available presentations
+  function unlockGate(ev) {
     ev.preventDefault();
     const pwd = document.getElementById('gate-pwd').value.trim().toLowerCase();
     const msg = document.getElementById('gate-msg');
+    const form = document.getElementById('gate-form');
+    const menu = document.getElementById('gate-menu');
     if (pwd === 'viewme') {
-      msg.textContent = 'Opening deck…';
+      msg.textContent = 'Access granted.';
       msg.classList.remove('err');
-      window.open('deck/', '_blank');
+      msg.classList.add('ok');
+      form.hidden = true;
+      menu.hidden = false;
     } else {
       msg.textContent = 'Incorrect passcode.';
       msg.classList.add('err');
+      msg.classList.remove('ok');
     }
     return false;
   }
