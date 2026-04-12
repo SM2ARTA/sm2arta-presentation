@@ -101,7 +101,7 @@
 
   /* ===== Typography ===== */
   h1, h2, h3, h4 { font-weight: 800; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
-  h1 { font-size: clamp(36px, 6vw, 72px); }
+  h1 { font-size: clamp(40px, 5.2vw, 68px); line-height: 1.02; }
   h2 { font-size: clamp(28px, 4vw, 48px); margin-bottom: 16px; }
   h3 { font-size: clamp(18px, 1.8vw, 22px); margin-bottom: 8px; }
   .red { color: var(--red); }
@@ -129,12 +129,12 @@
     padding: 16px 24px; max-width: 1240px; margin: 0 auto;
   }
   .logo {
-    display: flex; align-items: center; gap: 10px;
-    font-weight: 800; font-size: 18px; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 800; font-size: 22px; letter-spacing: -0.015em; color: var(--ink);
   }
-  .logo sup { font-size: 0.6em; color: var(--red); font-weight: 700; vertical-align: super; }
-  .logo sup.tm { color: var(--muted); font-size: 0.45em; margin-left: 2px; font-weight: 600; }
-  .logo .accent { width: 26px; height: 3px; background: var(--red); }
+  .logo sup { font-size: 0.55em; color: var(--red); font-weight: 700; vertical-align: super; }
+  .logo sup.tm { color: var(--muted); font-size: 0.42em; margin-left: 2px; font-weight: 600; }
+  .logo .accent { width: 32px; height: 3px; background: var(--red); }
 
   .nav-links { display: flex; align-items: center; gap: 32px; }
   .nav-links a {
@@ -162,8 +162,9 @@
     display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
   }
   @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 32px; } }
-  .hero h1 { margin-bottom: 20px; }
-  .hero .lede { font-size: clamp(16px, 1.4vw, 20px); color: var(--ink-soft); margin-bottom: 28px; max-width: 56ch; }
+  .hero h1 { margin-bottom: 22px; max-width: 14ch; }
+  .hero h1 br { display: block; }
+  .hero .lede { font-size: clamp(16px, 1.4vw, 19px); color: var(--ink-soft); margin-bottom: 28px; max-width: 52ch; line-height: 1.55; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -176,22 +177,53 @@
   .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
   .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
   .hero-stats {
-    display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap;
+    display: flex; gap: 44px; margin-top: 44px; flex-wrap: wrap;
     padding-top: 32px; border-top: 1px solid var(--line);
   }
-  .hero-stat .num {
-    font-size: clamp(24px, 2.6vw, 32px); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1;
+  .hero-stat { position: relative; }
+  .hero-stat + .hero-stat { padding-left: 44px; border-left: 1px solid var(--line); }
+  @media (max-width: 560px) {
+    .hero-stats { gap: 20px; }
+    .hero-stat + .hero-stat { padding-left: 0; border-left: 0; }
   }
-  .hero-stat .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 700; margin-top: 6px; }
+  .hero-stat .num {
+    font-size: clamp(28px, 2.6vw, 36px); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1;
+  }
+  .hero-stat .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 700; margin-top: 8px; }
   .hero-visual {
     position: relative;
-    border-radius: 14px; overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 8px 24px rgba(229,13,40,0.08);
     border: 1px solid var(--line);
     aspect-ratio: 4 / 3;
     background: var(--bg-alt);
   }
   .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-visual::before {
+    content: ''; position: absolute; top: -18px; right: -18px; width: 140px; height: 140px;
+    background: var(--tint); border-radius: 16px; z-index: -1;
+  }
+  .hero-visual::after {
+    content: ''; position: absolute; bottom: -14px; left: -14px; width: 80px; height: 80px;
+    background-image: radial-gradient(circle, var(--red) 2px, transparent 2.5px);
+    background-size: 14px 14px; opacity: 0.6; z-index: -1;
+  }
+  .hero-visual-wrap { position: relative; }
+  .hero-badge {
+    position: absolute; bottom: -18px; left: 24px;
+    background: var(--white); border: 1px solid var(--line);
+    padding: 12px 16px; border-radius: 10px; display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    z-index: 2;
+  }
+  .hero-badge .pulse { width: 10px; height: 10px; background: #16a34a; border-radius: 50%; position: relative; }
+  .hero-badge .pulse::after {
+    content: ''; position: absolute; inset: 0; border-radius: 50%; background: #16a34a;
+    animation: pulseDot 1.8s ease-out infinite;
+  }
+  @keyframes pulseDot { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.4); opacity: 0; } }
+  .hero-badge .bt { font-size: 12px; font-weight: 800; color: var(--ink); letter-spacing: 0.02em; }
+  .hero-badge .bb { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; }
 
   /* ===== Trust strip ===== */
   .trust {
@@ -352,7 +384,7 @@
   <div class="container hero-grid">
     <div>
       <span class="eyebrow">Event Material Planning · Asset Tracking</span>
-      <h1>Run every <span class="red">event</span>,<br>track every <span class="red">asset</span>.</h1>
+      <h1>Run every <span class="red">event</span>.<br>Track every <span class="red">asset</span>.</h1>
       <p class="lede">SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA<sup style="font-size:0.55em;color:var(--muted);font-weight:600;margin-left:2px">™</sup> is the multiuser, web-based platform for event material planning and asset tracking — proven at major sporting events and ready for your next one.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#contact">Book a Demo</a>
@@ -360,12 +392,21 @@
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><div class="num">6+ yrs</div><div class="label">In Production</div></div>
-        <div class="hero-stat"><div class="num">3 Roles</div><div class="label">End-to-End</div></div>
-        <div class="hero-stat"><div class="num">∞</div><div class="label">Users · Events · SKUs</div></div>
+        <div class="hero-stat"><div class="num">3</div><div class="label">Role Interfaces</div></div>
+        <div class="hero-stat"><div class="num">Unlimited</div><div class="label">Users · Events · SKUs</div></div>
       </div>
     </div>
-    <div class="hero-visual" data-reveal>
-      <img src="assets/hero-main.jpg" alt="SM2ARTA platform dashboard used by event operations teams" loading="eager" width="1200" height="900">
+    <div class="hero-visual-wrap" data-reveal>
+      <div class="hero-visual">
+        <img src="assets/hero-main.jpg" alt="SM2ARTA platform dashboard used by event operations teams" loading="eager" width="1200" height="900">
+      </div>
+      <div class="hero-badge" aria-hidden="true">
+        <span class="pulse"></span>
+        <div>
+          <div class="bt">Live at demo.smmarta.com</div>
+          <div class="bb">Platform Status · Operational</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
