@@ -118,7 +118,9 @@
     padding: clamp(64px, 9vw, 120px) 0; position: relative;
     min-height: 100vh;
     display: flex; align-items: center;
+    scroll-margin-top: 72px;
   }
+  section [id] { scroll-margin-top: 72px; }
   @media (max-width: 720px) { section { min-height: auto; } }
   .section-tint { background: var(--bg-alt); }
 
@@ -376,7 +378,6 @@
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#platform">Platform</a>
-      <a href="#features">Features</a>
       <a href="#timeline">Timeline</a>
       <a href="#partner">Partner</a>
       <a class="cta" href="#contact">Book a Demo</a>
