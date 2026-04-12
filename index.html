@@ -63,6 +63,101 @@
   #save-pdf-btn svg { width: 16px; height: 16px; stroke: #FFFFFF; fill: none; stroke-width: 2; }
   @media print { #save-pdf-btn { display: none !important; } }
   body.print-pdf #save-pdf-btn { display: none !important; }
+
+  /* ============================================================
+     SLIDE ENTRANCE ANIMATIONS
+     Each slide's elements fade/slide in with a staggered cadence
+     when the slide becomes .present
+     ============================================================ */
+  @keyframes smFadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes smFadeLeft { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes smFadeUp   { from { opacity: 0; transform: translateY(22px); }  to { opacity: 1; transform: translateY(0); } }
+  @keyframes smFadeIn   { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes smGrowX    { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: scaleX(1); } }
+  @keyframes smPopIn    { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+  @keyframes smDrawLine { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+  @keyframes smFloat    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+  /* Default: stagger all top-level svg children on the active slide.
+     We target children of the slide's root <svg> so nested <g> structures
+     inherit via their own transforms without conflict. */
+  .reveal .slides section.present > svg > * {
+    animation: smFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.35s;
+  }
+  /* Background rect should appear instantly */
+  .reveal .slides section.present > svg > rect:first-of-type,
+  .reveal .slides section.present > svg > use[href="#hdr"] {
+    animation: none;
+    opacity: 1;
+  }
+  /* Eyebrow (y=128) — drops down */
+  .reveal .slides section.present > svg > text[y="128"] {
+    animation: smFadeDown 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.15s;
+  }
+  /* Title (y=178) — slides from left */
+  .reveal .slides section.present > svg > text[y="178"] {
+    animation: smFadeLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.25s;
+  }
+  /* Red underline (y=198) — grows from left */
+  .reveal .slides section.present > svg > rect[y="198"][width="72"] {
+    transform-origin: left center;
+    transform-box: fill-box;
+    animation: smGrowX 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.55s;
+  }
+  /* Subtitle line sometimes at y=228 */
+  .reveal .slides section.present > svg > text[y="228"] {
+    animation: smFadeUp 0.6s ease-out both;
+    animation-delay: 0.7s;
+  }
+  /* Main content group(s) — translate(60,...) wrappers: fade up with stagger */
+  .reveal .slides section.present > svg > g:not([class]) {
+    animation: smFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.65s;
+  }
+  /* Context bar — slides up from bottom */
+  .reveal .slides section.present > svg > g.ctxbar {
+    animation: smFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.95s;
+  }
+  /* Slide number badge — pop in */
+  .reveal .slides section.present > svg > g[transform*="1210, 660"] {
+    transform-origin: 1228px 679px;
+    transform-box: fill-box;
+    animation: smPopIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: 1.05s;
+  }
+
+  /* Subtle living-element: pulse on red bar in the shared header */
+  @keyframes smHdrPulse {
+    0%, 60%, 100% { opacity: 1; }
+    70% { opacity: 0.35; }
+    80% { opacity: 1; }
+  }
+  .reveal .slides section.present use[href="#hdr"] {
+    animation: smFadeIn 0.4s ease-out both;
+    animation-delay: 0s;
+  }
+
+  /* Cover slide (slide 1) gets an extra dramatic feel — title scales in */
+  .reveal .slides section:first-of-type.present > svg > text[font-size="64"],
+  .reveal .slides section:first-of-type.present > svg > text[font-size="72"] {
+    animation: smFadeLeft 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.35s;
+  }
+
+  /* Reduced motion override */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal .slides section.present > svg > *,
+    .reveal .slides section.present > svg > text,
+    .reveal .slides section.present > svg > g,
+    .reveal .slides section.present > svg > rect {
+      animation: none !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1990,7 +2085,9 @@ Reveal.initialize({
   margin: 0.02,
   minScale: 0.2,
   maxScale: 2.0,
-  transition: 'fade',
+  transition: 'slide',
+  transitionSpeed: 'default',
+  backgroundTransition: 'fade',
   controls: true,
   progress: true,
   center: false,
