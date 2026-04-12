@@ -153,6 +153,8 @@
   /* ===== Hero ===== */
   .hero {
     padding: clamp(48px, 8vw, 96px) 0 clamp(64px, 9vw, 120px);
+    min-height: 88vh;
+    display: flex; align-items: center;
     background:
       radial-gradient(ellipse 800px 500px at 85% 20%, rgba(229,13,40,0.06), transparent),
       linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
@@ -160,6 +162,7 @@
   }
   .hero-grid {
     display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
+    width: 100%;
   }
   @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 32px; } }
   .hero h1 { margin-bottom: 22px; max-width: 14ch; }
@@ -190,31 +193,30 @@
     font-size: clamp(28px, 2.6vw, 36px); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1;
   }
   .hero-stat .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 700; margin-top: 8px; }
+  .hero-visual-wrap { position: relative; isolation: isolate; padding: 18px; }
+  .hero-visual-wrap::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 160px; height: 160px;
+    background: var(--tint); border-radius: 16px; z-index: 0;
+  }
+  .hero-visual-wrap::after {
+    content: ''; position: absolute; bottom: -12px; left: -12px; width: 110px; height: 110px;
+    background-image: radial-gradient(circle, var(--red) 1.8px, transparent 2.2px);
+    background-size: 14px 14px; opacity: 0.55; z-index: 0;
+  }
   .hero-visual {
-    position: relative;
+    position: relative; z-index: 1;
     border-radius: 16px; overflow: hidden;
     box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 8px 24px rgba(229,13,40,0.08);
     border: 1px solid var(--line);
     aspect-ratio: 4 / 3;
     background: var(--bg-alt);
   }
-  .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-visual::before {
-    content: ''; position: absolute; top: -18px; right: -18px; width: 140px; height: 140px;
-    background: var(--tint); border-radius: 16px; z-index: -1;
-  }
-  .hero-visual::after {
-    content: ''; position: absolute; bottom: -14px; left: -14px; width: 80px; height: 80px;
-    background-image: radial-gradient(circle, var(--red) 2px, transparent 2.5px);
-    background-size: 14px 14px; opacity: 0.6; z-index: -1;
-  }
-  .hero-visual-wrap { position: relative; }
+  .hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .hero-badge {
-    position: absolute; bottom: -18px; left: 24px;
+    position: absolute; bottom: 4px; left: 36px; z-index: 2;
     background: var(--white); border: 1px solid var(--line);
     padding: 12px 16px; border-radius: 10px; display: flex; align-items: center; gap: 10px;
     box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-    z-index: 2;
   }
   .hero-badge .pulse { width: 10px; height: 10px; background: #16a34a; border-radius: 50%; position: relative; }
   .hero-badge .pulse::after {
