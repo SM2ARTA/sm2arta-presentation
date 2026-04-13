@@ -410,6 +410,63 @@
   .gate-menu .gm-t { display: block; color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
   .gate-menu .gm-d { display: block; color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 500; margin-top: 2px; }
 
+  /* ===== Demo modal ===== */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(15,15,16,0.68);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    z-index: 200; display: none; align-items: center; justify-content: center;
+    padding: 24px; opacity: 0; transition: opacity 0.2s ease;
+  }
+  .modal-backdrop.open { display: flex; opacity: 1; }
+  .modal {
+    background: var(--white); border-radius: 14px; max-width: 560px; width: 100%;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    transform: translateY(12px); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 92vh; overflow-y: auto;
+  }
+  .modal-backdrop.open .modal { transform: translateY(0); }
+  .modal-head {
+    padding: 24px 28px 8px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  }
+  .modal-head h3 { font-size: 22px; margin-bottom: 4px; }
+  .modal-head p { font-size: 14px; color: var(--muted); margin: 0; }
+  .modal-close {
+    background: transparent; border: none; cursor: pointer; width: 32px; height: 32px;
+    border-radius: 6px; color: var(--muted); font-size: 20px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .modal-close:hover { background: var(--bg-alt); color: var(--ink); }
+  .modal-body { padding: 16px 28px 28px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: 0.04em; }
+  .field label .req { color: var(--red); }
+  .field input, .field textarea {
+    width: 100%; padding: 11px 14px; font: inherit; font-size: 14px;
+    border: 1px solid var(--line); border-radius: 6px; background: var(--white); color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none; border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(229,13,40,0.15);
+  }
+  .field textarea { resize: vertical; min-height: 90px; font-family: inherit; }
+  .modal-actions { display: flex; gap: 10px; align-items: center; margin-top: 6px; }
+  .modal-actions .btn { padding: 12px 22px; font-size: 14px; }
+  .modal-note { font-size: 12px; color: var(--muted); margin-top: 14px; }
+  .modal-note a { color: var(--red); font-weight: 700; }
+  .modal-success {
+    text-align: center; padding: 20px 0;
+  }
+  .modal-success .check {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--red);
+    color: var(--white); display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .modal-success h3 { margin-bottom: 6px; }
+  .modal-success p { color: var(--muted); margin: 0; }
+  body.modal-open { overflow: hidden; }
+
   /* Fade-in on scroll */
   [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
   [data-reveal].visible { opacity: 1; transform: translateY(0); }
@@ -431,7 +488,7 @@
       <a href="#benefits">Benefits</a>
       <a href="#timeline">Track Record</a>
       <a href="#partner">Partner</a>
-      <a class="cta" href="#contact">Book a Demo</a>
+      <a class="cta" href="#contact" onclick="openDemoModal(event)">Book a Demo</a>
     </nav>
   </div>
 </header>
@@ -444,7 +501,7 @@
       <h1>Run every <span class="red">event</span>.<br>Track every <span class="red">asset</span>.</h1>
       <p class="lede">SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA<sup style="font-size:0.55em;color:var(--muted);font-weight:600;margin-left:2px">™</sup> is the multiuser, web-based platform for event material planning and asset tracking — proven at major sporting events and ready for your next one.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#contact">Book a Demo</a>
+        <a class="btn btn-primary" href="#contact" onclick="openDemoModal(event)">Book a Demo</a>
         <a class="btn btn-ghost" href="overview.html" target="_blank">See It in Action →</a>
       </div>
       <div class="hero-stats">
@@ -735,7 +792,7 @@
     <h2>Ready to see it <span class="red">in action?</span></h2>
     <p>Book a walk-through of SM2ARTA — we'll tailor the session to your event, your scope, and your team. Hands-on access to <strong style="color:var(--white)">demo.smmarta.com</strong> is available on request.</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="mailto:contact@smmarta.com?subject=SM2ARTA%20Demo%20Request">Book a Demo</a>
+      <a class="btn btn-primary" href="#contact" onclick="openDemoModal(event)">Book a Demo</a>
       <a class="btn btn-ghost" style="color: var(--white); border-color: rgba(255,255,255,0.3);" href="overview.html" target="_blank">See It in Action →</a>
     </div>
   </div>
@@ -763,7 +820,7 @@
         <ul>
           <li><a href="overview.html">Platform Overview (PDF)</a></li>
           <li><a href="#partner">Partnership</a></li>
-          <li><a href="#contact">Book a Demo</a></li>
+          <li><a href="#contact" onclick="openDemoModal(event)">Book a Demo</a></li>
         </ul>
       </div>
       <div>
@@ -799,12 +856,125 @@
   </div>
 </footer>
 
+<!-- ================== DEMO MODAL ================== -->
+<div class="modal-backdrop" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-title" aria-hidden="true" onclick="if(event.target===this)closeDemoModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <span class="eyebrow">Book a Demo</span>
+        <h3 id="demo-title">Let's walk through SM<sup style="font-size:0.55em;color:var(--red)">2</sup>ARTA together.</h3>
+        <p>Tell us about your event. We'll tailor the session and send credentials if hands-on access suits.</p>
+      </div>
+      <button class="modal-close" type="button" onclick="closeDemoModal()" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <form id="demo-form" action="https://formsubmit.co/info@smmarta.com" method="POST">
+        <!-- FormSubmit hidden config -->
+        <input type="hidden" name="_subject" value="New Demo Request — SM2ARTA">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://www.smmarta.com/?demo=received">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="field">
+          <label for="df-name">Name <span class="req">*</span></label>
+          <input id="df-name" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="df-email">Email <span class="req">*</span></label>
+          <input id="df-email" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="df-company">Company / Organization</label>
+          <input id="df-company" name="company" type="text" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="df-event">Event or Use Case</label>
+          <input id="df-event" name="event" type="text" placeholder="e.g. 2028 Summer Tournament · 120 venues">
+        </div>
+        <div class="field">
+          <label for="df-msg">Message</label>
+          <textarea id="df-msg" name="message" placeholder="Anything you'd like us to prepare for the walk-through?"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" type="submit">Send Request</button>
+          <button class="btn btn-ghost" type="button" onclick="closeDemoModal()">Cancel</button>
+        </div>
+        <p class="modal-note">Goes straight to <a href="mailto:info@smmarta.com">info@smmarta.com</a>. We respond within one business day.</p>
+      </form>
+      <div class="modal-success" id="demo-success" hidden>
+        <div class="check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></div>
+        <h3>Request received.</h3>
+        <p>Thanks — we'll be in touch shortly.</p>
+        <div class="modal-actions" style="justify-content:center; margin-top: 18px;">
+          <button class="btn btn-ghost" type="button" onclick="closeDemoModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  // Demo modal controls
+  function openDemoModal(ev) {
+    if (ev) ev.preventDefault();
+    const m = document.getElementById('demo-modal');
+    m.classList.add('open');
+    m.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    setTimeout(() => { const first = document.getElementById('df-name'); if (first) first.focus(); }, 80);
+  }
+  function closeDemoModal() {
+    const m = document.getElementById('demo-modal');
+    m.classList.remove('open');
+    m.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const m = document.getElementById('demo-modal');
+      if (m && m.classList.contains('open')) closeDemoModal();
+    }
+  });
+
+  // Intercept form submit: post via fetch so user stays on page; show inline success
+  (function () {
+    const form = document.getElementById('demo-form');
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      const data = new FormData(form);
+      try {
+        const r = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+        if (r.ok) {
+          form.hidden = true;
+          document.getElementById('demo-success').hidden = false;
+        } else {
+          throw new Error('Network');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send Request';
+        alert('Could not send — please email info@smmarta.com directly.');
+      }
+    });
+  })();
+
+  // If redirected back with ?demo=received, auto-open the success state
+  if (new URLSearchParams(window.location.search).get('demo') === 'received') {
+    openDemoModal();
+    document.getElementById('demo-form').hidden = true;
+    document.getElementById('demo-success').hidden = false;
+  }
 
   // Private access gate — passcode unlocks a menu of available presentations
   function unlockGate(ev) {
