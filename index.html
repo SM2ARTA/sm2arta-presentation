@@ -160,9 +160,24 @@
   .logo sup.tm { color: var(--muted); font-size: 0.42em; margin-left: 2px; font-weight: 600; }
   .logo .accent { width: 32px; height: 3px; background: var(--red); }
 
-  /* Hamburger is the ONLY nav at all widths — 11-item nav too dense for inline layout */
+  /* Desktop: inline nav */
+  .nav-links { display: flex; align-items: center; gap: 22px; }
+  .nav-links a {
+    font-weight: 500; font-size: 13.5px; color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-links .cta {
+    background: var(--red); color: var(--white);
+    padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 13px;
+    letter-spacing: 0.04em;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .nav-links .cta:hover { background: var(--red-dark); color: var(--white); transform: translateY(-1px); }
+
+  /* Hamburger hidden on wide screens */
   .nav-toggle {
-    display: flex; background: none; border: 1px solid var(--line);
+    display: none; background: none; border: 1px solid var(--line);
     width: 42px; height: 42px; border-radius: 6px; cursor: pointer;
     align-items: center; justify-content: center;
     transition: border-color 0.15s ease, background 0.15s ease;
@@ -170,44 +185,28 @@
   .nav-toggle:hover { border-color: var(--red); background: rgba(229,13,40,0.04); }
   .nav-toggle svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; }
 
-  .nav-links {
-    position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
-    background: var(--white); display: flex; flex-direction: column; align-items: stretch;
-    gap: 0; padding: 16px 20px 40px; z-index: 90;
-    transform: translateY(-110%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    border-top: 1px solid var(--line);
-    overflow-y: auto;
-  }
-  body.nav-open .nav-links { transform: translateY(0); }
-  body.nav-open { overflow: hidden; }
-  .nav-links a {
-    padding: 14px 8px; font-size: 16px; font-weight: 600;
-    border-bottom: 1px solid var(--line); color: var(--ink);
-    transition: color 0.15s ease;
-  }
-  .nav-links a:hover { color: var(--red); }
-  .nav-links .cta {
-    margin-top: 14px; padding: 14px; text-align: center;
-    background: var(--red); color: var(--white);
-    border-radius: 6px; font-weight: 700;
-    font-size: 15px; letter-spacing: 0.06em;
-    border: none;
-  }
-  .nav-links .cta:hover { background: var(--red-dark); color: var(--white); }
-
-  /* Desktop: center the menu panel as a dropdown card */
-  @media (min-width: 961px) {
+  /* Narrow: hamburger replaces inline nav */
+  @media (max-width: 1100px) {
+    .nav-toggle { display: flex; }
+    header .nav { padding: 12px 20px; }
     .nav-links {
-      position: absolute; top: 68px; right: 24px; left: auto; bottom: auto;
-      width: 320px; max-height: calc(100vh - 96px);
-      border: 1px solid var(--line); border-radius: 10px;
-      box-shadow: 0 20px 60px -20px rgba(0,0,0,0.25);
-      padding: 12px 16px 20px;
-      transform: translateY(-8px); opacity: 0; pointer-events: none;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--white); flex-direction: column; align-items: stretch;
+      gap: 0; padding: 16px 20px 40px; z-index: 90;
+      transform: translateY(-110%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-top: 1px solid var(--line);
+      overflow-y: auto;
     }
-    body.nav-open .nav-links { transform: translateY(0); opacity: 1; pointer-events: auto; }
-    body.nav-open { overflow: auto; }
+    body.nav-open .nav-links { transform: translateY(0); }
+    body.nav-open { overflow: hidden; }
+    .nav-links a {
+      padding: 14px 8px; font-size: 16px; font-weight: 600;
+      border-bottom: 1px solid var(--line); color: var(--ink);
+    }
+    .nav-links .cta {
+      margin-top: 14px; padding: 14px; text-align: center;
+      font-size: 15px; letter-spacing: 0.06em;
+    }
   }
 
   /* ===== Hero ===== */
@@ -1511,7 +1510,7 @@
   });
   // Safety: ensure nav-open is cleared if viewport crosses desktop breakpoint
   window.addEventListener('resize', () => {
-    // No desktop-inline nav anymore; no auto-close needed on resize.
+    if (window.innerWidth > 1100 && document.body.classList.contains('nav-open')) toggleNav();
   });
 
   // Scroll reveal
