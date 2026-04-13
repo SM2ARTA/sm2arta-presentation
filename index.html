@@ -30,7 +30,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,600&display=swap" rel="stylesheet">
 
 <!-- JSON-LD Structured Data for SEO -->
 <script type="application/ld+json">
@@ -100,10 +100,17 @@
   a { color: inherit; text-decoration: none; }
 
   /* ===== Typography ===== */
-  h1, h2, h3, h4 { font-weight: 800; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
-  h1 { font-size: clamp(40px, 5.2vw, 68px); line-height: 1.02; }
-  h2 { font-size: clamp(28px, 4vw, 48px); margin-bottom: 16px; }
-  h3 { font-size: clamp(18px, 1.8vw, 22px); margin-bottom: 8px; }
+  h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; color: var(--ink); }
+  h1, h2 {
+    font-family: 'Fraunces', 'DM Sans', Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 600;
+  }
+  h1 .red, h2 .red { font-style: italic; font-weight: 600; }
+  h1 { font-size: clamp(44px, 5.6vw, 76px); line-height: 1.0; letter-spacing: -0.03em; }
+  h2 { font-size: clamp(32px, 4.4vw, 56px); margin-bottom: 18px; letter-spacing: -0.025em; }
+  h3 { font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: clamp(18px, 1.8vw, 22px); margin-bottom: 8px; letter-spacing: -0.01em; }
+  h4 { font-family: 'DM Sans', sans-serif; font-weight: 800; }
   .red { color: var(--red); }
   .eyebrow {
     display: inline-block;
@@ -576,13 +583,100 @@
   .modal-success p { color: var(--muted); margin: 0; }
   body.modal-open { overflow: hidden; }
 
+  /* ===== Scroll progress bar ===== */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--red), #FF3A55);
+    z-index: 100; transition: width 0.08s ease-out;
+    box-shadow: 0 0 12px rgba(229,13,40,0.4);
+  }
+
+  /* ===== Grain overlay for atmosphere ===== */
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    opacity: 0.035; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ===== Watermark section numerals ===== */
+  .sec-num {
+    position: absolute; top: 40px; right: 40px;
+    font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;
+    font-size: clamp(80px, 12vw, 180px); line-height: 1;
+    color: var(--ink); opacity: 0.04;
+    pointer-events: none; user-select: none; z-index: 0;
+  }
+  section .container { position: relative; z-index: 2; }
+
+  /* ===== Hero word-by-word reveal ===== */
+  .hero h1 .word {
+    display: inline-block; opacity: 0; transform: translateY(40px);
+    animation: wordRise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .hero h1 .word:nth-child(1) { animation-delay: 0.1s; }
+  .hero h1 .word:nth-child(2) { animation-delay: 0.22s; }
+  .hero h1 .word:nth-child(3) { animation-delay: 0.34s; }
+  .hero h1 .word:nth-child(4) { animation-delay: 0.52s; }
+  .hero h1 .word:nth-child(5) { animation-delay: 0.64s; }
+  .hero h1 .word:nth-child(6) { animation-delay: 0.76s; }
+  @keyframes wordRise {
+    0%   { opacity: 0; transform: translateY(40px) rotate(2deg); filter: blur(6px); }
+    60%  { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: translateY(0) rotate(0); filter: blur(0); }
+  }
+
+  /* ===== Hero ambient gradient mesh ===== */
+  .hero {
+    background:
+      radial-gradient(ellipse 600px 400px at 15% 100%, rgba(229,13,40,0.05), transparent 60%),
+      radial-gradient(ellipse 800px 500px at 85% 20%, rgba(229,13,40,0.08), transparent 60%),
+      radial-gradient(ellipse 500px 300px at 50% 50%, rgba(229,13,40,0.03), transparent 50%),
+      linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+  }
+
+  /* ===== Editorial accent on section eyebrows ===== */
+  .eyebrow {
+    position: relative; padding-left: 32px;
+  }
+  .eyebrow::before {
+    content: ''; position: absolute; left: 0; top: 50%; width: 24px; height: 1px;
+    background: var(--red); transform: translateY(-50%);
+  }
+
+  /* ===== Feature card — add subtle tilt on hover ===== */
+  .feature-card, .sec-card, .partner-card, .int-card, .new-card, .role-card {
+    transform-style: preserve-3d; perspective: 1000px;
+  }
+
+  /* ===== Card hover — elevated tilt ===== */
+  .feature-card:hover, .sec-card:hover, .int-card:hover {
+    transform: translateY(-6px) rotateX(2deg);
+  }
+
+  /* ===== Metric counters: subtle pulse when visible ===== */
+  .metric.visible .num { animation: countPop 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes countPop {
+    0% { opacity: 0; transform: translateY(18px) scale(0.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
   /* Fade-in on scroll */
-  [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
   [data-reveal].visible { opacity: 1; transform: translateY(0); }
-  @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
+  [data-reveal][data-delay="1"] { transition-delay: 0.08s; }
+  [data-reveal][data-delay="2"] { transition-delay: 0.16s; }
+  [data-reveal][data-delay="3"] { transition-delay: 0.24s; }
+  [data-reveal][data-delay="4"] { transition-delay: 0.32s; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1; transform: none; }
+    .hero h1 .word { opacity: 1; transform: none; animation: none; }
+  }
 </style>
 </head>
 <body>
+
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="grain" aria-hidden="true"></div>
 
 <header>
   <div class="nav">
@@ -610,7 +704,7 @@
   <div class="container hero-grid">
     <div>
       <span class="eyebrow">Event Material Planning · Asset Tracking</span>
-      <h1>Run every <span class="red">event</span>.<br>Track every <span class="red">asset</span>.</h1>
+      <h1><span class="word">Run</span> <span class="word">every</span> <span class="word red">event.</span><br><span class="word">Track</span> <span class="word">every</span> <span class="word red">asset.</span></h1>
       <p class="lede">SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA<sup style="font-size:0.55em;color:var(--muted);font-weight:600;margin-left:2px">™</sup> is the multiuser, web-based platform for event material planning and asset tracking — proven at major sporting events and ready for your next one.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#contact" onclick="openDemoModal(event)">Book a Demo</a>
@@ -651,6 +745,7 @@
 
 <!-- ================== PLATFORM INTRO ================== -->
 <section id="platform">
+  <span class="sec-num" aria-hidden="true">01</span>
   <div class="container">
     <div style="max-width: 780px;" data-reveal>
       <span class="eyebrow">What SM2ARTA does</span>
@@ -664,6 +759,7 @@
 
 <!-- ================== FEATURES GRID ================== -->
 <section id="features">
+  <span class="sec-num" aria-hidden="true">02</span>
   <div class="container">
     <div style="max-width: 780px; margin-bottom: 32px;" data-reveal>
       <span class="eyebrow">Core Capabilities</span>
@@ -706,6 +802,7 @@
 
 <!-- ================== SPLIT: MATERIAL PLANNING ================== -->
 <section id="solutions" class="section-tint">
+  <span class="sec-num" aria-hidden="true">03</span>
   <div class="container split" data-reveal>
     <div class="split-img"><img src="assets/material-planning.jpg" alt="SM2ARTA material planning interface — manage venues, spaces, and FF&E catalog" loading="lazy" width="1200" height="900"></div>
     <div>
@@ -762,6 +859,7 @@
 
 <!-- ================== BENEFITS / WHY SM2ARTA ================== -->
 <section id="benefits">
+  <span class="sec-num" aria-hidden="true">04</span>
   <div class="container" data-reveal>
     <span class="eyebrow">Why SM2ARTA</span>
     <h2>Built for events. <span class="red">Not a spreadsheet in disguise.</span></h2>
@@ -864,6 +962,7 @@
 
 <!-- ================== TIMELINE ================== -->
 <section id="timeline">
+  <span class="sec-num" aria-hidden="true">05</span>
   <div class="container" data-reveal>
     <span class="eyebrow">Track Record</span>
     <h2>Production-proven, <span class="red">year after year</span>.</h2>
@@ -895,6 +994,7 @@
 
 <!-- ================== INTEGRATIONS ================== -->
 <section id="integrations">
+  <span class="sec-num" aria-hidden="true">06</span>
   <div class="container" data-reveal>
     <span class="eyebrow">Integrations</span>
     <h2>Plugs into the stack <span class="red">you already use</span>.</h2>
@@ -936,6 +1036,7 @@
 
 <!-- ================== SECURITY & COMPLIANCE ================== -->
 <section id="security" class="section-tint">
+  <span class="sec-num" aria-hidden="true">07</span>
   <div class="container" data-reveal>
     <span class="eyebrow">Security &amp; Compliance</span>
     <h2>Built to <span class="red">enterprise audit</span> standards.</h2>
@@ -1024,6 +1125,7 @@
 
 <!-- ================== PARTNERSHIP ================== -->
 <section id="partner">
+  <span class="sec-num" aria-hidden="true">08</span>
   <div class="container" data-reveal>
     <span class="eyebrow">How we work together</span>
     <h2>Deployment, done <span class="red">with you</span>.</h2>
@@ -1215,6 +1317,50 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  // Scroll progress bar
+  const sp = document.getElementById('scroll-progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    sp.style.width = Math.max(0, Math.min(1, scrolled)) * 100 + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Metric counter animation
+  function animateMetric(el) {
+    const numEl = el.querySelector('.num');
+    if (!numEl || numEl.dataset.done) return;
+    numEl.dataset.done = '1';
+    const txt = numEl.textContent.trim();
+    const m = txt.match(/^([\d.]+)([a-zA-Z+]*)$/);
+    const unitSpan = numEl.querySelector('.unit');
+    const unitText = unitSpan ? unitSpan.outerHTML : '';
+    if (!m && !(txt === '0')) { el.classList.add('visible'); return; }
+    const target = m ? parseFloat(m[1]) : 0;
+    const suffix = m ? m[2] : '';
+    const prefix = '';
+    const duration = 1600;
+    const start = performance.now();
+    const isDecimal = String(target).includes('.');
+    function step(now) {
+      const t = Math.min(1, (now - start) / duration);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = target * eased;
+      const shown = isDecimal ? val.toFixed(1) : Math.floor(val);
+      numEl.innerHTML = prefix + shown + suffix + (unitText && t === 1 ? '' : '');
+      if (t < 1) requestAnimationFrame(step);
+      else numEl.innerHTML = prefix + (isDecimal ? target.toFixed(1) : target) + suffix + unitText;
+    }
+    el.classList.add('visible');
+    requestAnimationFrame(step);
+  }
+  const metricIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animateMetric(e.target); metricIo.unobserve(e.target); } });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.metric').forEach(el => metricIo.observe(el));
 
   // Demo modal controls
   function openDemoModal(ev) {
