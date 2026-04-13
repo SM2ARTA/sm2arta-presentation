@@ -376,16 +376,35 @@
   .sec-card .sec-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .sec-card h3 { font-size: 15px; margin-bottom: 4px; }
   .sec-card p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.5; }
+  .sec-badges-wrap {
+    margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line);
+  }
+  .sec-badges-label {
+    font-size: 11px; color: var(--muted); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700;
+    margin-bottom: 18px; text-align: center;
+  }
   .sec-badges {
-    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px;
-    padding-top: 24px; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px;
   }
+  @media (max-width: 1100px) { .sec-badges { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 560px)  { .sec-badges { grid-template-columns: repeat(2, 1fr); } }
   .sec-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 8px 14px; background: var(--bg-alt); border: 1px solid var(--line);
-    border-radius: 50px; font-size: 12px; font-weight: 700; color: var(--ink-soft); letter-spacing: 0.04em;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 18px 10px 14px;
+    background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
-  .sec-badge .dot { width: 6px; height: 6px; background: #16a34a; border-radius: 50%; }
+  .sec-badge:hover { transform: translateY(-2px); border-color: var(--red); box-shadow: 0 8px 20px rgba(229,13,40,0.08); }
+  .sec-badge .sb-shield {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), #C10B22);
+    color: var(--white); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 10px rgba(229,13,40,0.25);
+  }
+  .sec-badge .sb-shield svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .sec-badge .sb-t { font-size: 11px; font-weight: 800; color: var(--ink); letter-spacing: 0.04em; line-height: 1.3; }
+  .sec-badge .sb-s { font-size: 9px; font-weight: 700; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
 
   /* ===== Integrations strip ===== */
   .int-strip {
@@ -965,15 +984,50 @@
       </article>
     </div>
 
-    <div class="sec-badges">
-      <span class="sec-badge"><span class="dot"></span>ISO 27001 Hosting</span>
-      <span class="sec-badge"><span class="dot"></span>GDPR Compliant</span>
-      <span class="sec-badge"><span class="dot"></span>EU Data Residency</span>
-      <span class="sec-badge"><span class="dot"></span>TLS 1.2+ · AES-256</span>
-      <span class="sec-badge"><span class="dot"></span>OWASP Top 10 Blocked</span>
-      <span class="sec-badge"><span class="dot"></span>HashiCorp Vault</span>
-      <span class="sec-badge"><span class="dot"></span>ClamAV File Scanning</span>
-      <span class="sec-badge"><span class="dot"></span>72h Critical SLA</span>
+    <div class="sec-badges-wrap">
+      <div class="sec-badges-label">Standards · Controls · Certifications</div>
+      <div class="sec-badges">
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <span class="sb-t">ISO 27001</span>
+          <span class="sb-s">Hosting</span>
+        </span>
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5M12 16h.01"/></svg></span>
+          <span class="sb-t">GDPR</span>
+          <span class="sb-s">Compliant</span>
+        </span>
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a14.5 14.5 0 0 0 0 18 14.5 14.5 0 0 0 0-18M3 12h18"/></svg></span>
+          <span class="sb-t">EU Data</span>
+          <span class="sb-s">Residency</span>
+        </span>
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          <span class="sb-t">TLS 1.2+ · AES-256</span>
+          <span class="sb-s">Encryption</span>
+        </span>
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v7c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5z"/><path d="m8 12 3 3 5-6"/></svg></span>
+          <span class="sb-t">OWASP Top 10</span>
+          <span class="sb-s">Blocked</span>
+        </span>
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></svg></span>
+          <span class="sb-t">HashiCorp</span>
+          <span class="sb-s">Vault</span>
+        </span>
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><circle cx="12" cy="15" r="2"/><path d="m15 18-1.2-1.2"/></svg></span>
+          <span class="sb-t">ClamAV</span>
+          <span class="sb-s">File Scanning</span>
+        </span>
+        <span class="sec-badge">
+          <span class="sb-shield"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <span class="sb-t">72h Critical</span>
+          <span class="sb-s">Patch SLA</span>
+        </span>
+      </div>
     </div>
   </div>
 </section>
