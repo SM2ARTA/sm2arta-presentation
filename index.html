@@ -427,6 +427,24 @@
   .int-card .int-name { font-size: 12px; font-weight: 700; color: var(--ink); letter-spacing: 0.04em; }
   .int-card .int-sub { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-top: 3px; }
 
+  /* ===== Video section ===== */
+  .video-wrap {
+    position: relative; margin-top: 40px; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 8px 24px rgba(229,13,40,0.08);
+    border: 1px solid var(--line); background: var(--ink); isolation: isolate;
+    max-width: 1080px; margin-left: auto; margin-right: auto;
+  }
+  .video-wrap::before {
+    content: ''; position: absolute; top: -18px; right: -18px; width: 160px; height: 160px;
+    background: var(--tint); border-radius: 16px; z-index: -1;
+  }
+  .video-wrap::after {
+    content: ''; position: absolute; bottom: -14px; left: -14px; width: 120px; height: 120px;
+    background-image: radial-gradient(circle, var(--red) 1.8px, transparent 2.2px);
+    background-size: 14px 14px; opacity: 0.55; z-index: -1;
+  }
+  .video-wrap video { display: block; width: 100%; height: auto; }
+
   /* ===== CTA band ===== */
   .cta-band {
     background: var(--ink); color: var(--white); padding: clamp(56px, 8vw, 96px) 0;
@@ -1030,6 +1048,23 @@
         <p>Expert consultation throughout the event cycle, not just at onboarding.</p>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ================== VIDEO ================== -->
+<section id="video" class="section-tint">
+  <div class="container" data-reveal>
+    <div style="text-align:center; max-width: 760px; margin: 0 auto;">
+      <span class="eyebrow">See it in motion</span>
+      <h2>Watch SM<sup style="font-size:0.55em;color:var(--red)">2</sup>ARTA in <span class="red">action</span>.</h2>
+      <p class="lede" style="margin: 10px auto 0;">A quick walkthrough of the platform — planning, tracking, and reporting in the same flow your team will use on event day.</p>
+    </div>
+    <figure class="video-wrap">
+      <video controls preload="metadata" poster="assets/hero-main.jpg" playsinline>
+        <source src="assets/video/sm2arta-overview.mp4" type="video/mp4">
+        Your browser doesn't support embedded video. <a href="assets/video/sm2arta-overview.mp4">Download the walkthrough</a>.
+      </video>
+    </figure>
   </div>
 </section>
 
