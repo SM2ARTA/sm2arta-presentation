@@ -337,6 +337,77 @@
   .partner-card h3 { font-size: 17px; margin-bottom: 6px; }
   .partner-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
+  /* ===== Metrics band ===== */
+  .metrics {
+    padding: clamp(56px, 8vw, 96px) 0;
+    background: var(--ink); color: var(--white);
+    position: relative; overflow: hidden;
+    min-height: auto; display: block;
+  }
+  .metrics::before {
+    content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(229,13,40,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .metrics .container { position: relative; z-index: 1; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 40px; }
+  @media (max-width: 900px) { .metrics-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .metrics-grid { grid-template-columns: 1fr; } }
+  .metric { border-left: 3px solid var(--red); padding-left: 16px; }
+  .metric .num { font-size: clamp(36px, 4.2vw, 52px); font-weight: 800; color: var(--white); letter-spacing: -0.02em; line-height: 1; }
+  .metric .num .unit { font-size: 0.55em; color: var(--red); margin-left: 4px; font-weight: 700; }
+  .metric .label { font-size: 11px; color: rgba(255,255,255,0.65); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-top: 10px; line-height: 1.4; }
+  .metrics h2 { color: var(--white); }
+  .metrics .lede { color: rgba(255,255,255,0.72); }
+
+  /* ===== Security & Compliance ===== */
+  .sec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  @media (max-width: 900px) { .sec-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .sec-grid { grid-template-columns: 1fr; } }
+  .sec-card {
+    background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .sec-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.06); border-color: var(--red); }
+  .sec-card .sec-icon {
+    width: 40px; height: 40px; border-radius: 8px; background: var(--tint); color: var(--red);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .sec-card .sec-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .sec-card h3 { font-size: 15px; margin-bottom: 4px; }
+  .sec-card p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.5; }
+  .sec-badges {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px;
+    padding-top: 24px; border-top: 1px solid var(--line);
+  }
+  .sec-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; background: var(--bg-alt); border: 1px solid var(--line);
+    border-radius: 50px; font-size: 12px; font-weight: 700; color: var(--ink-soft); letter-spacing: 0.04em;
+  }
+  .sec-badge .dot { width: 6px; height: 6px; background: #16a34a; border-radius: 50%; }
+
+  /* ===== Integrations strip ===== */
+  .int-strip {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-top: 40px;
+  }
+  @media (max-width: 900px) { .int-strip { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 520px) { .int-strip { grid-template-columns: 1fr 1fr; } }
+  .int-card {
+    border: 1px solid var(--line); border-radius: 10px; padding: 22px 14px; text-align: center;
+    background: var(--white);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .int-card:hover { transform: translateY(-3px); border-color: var(--red); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+  .int-card .int-icon {
+    width: 44px; height: 44px; margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink);
+  }
+  .int-card .int-icon svg { width: 40px; height: 40px; }
+  .int-card .int-name { font-size: 12px; font-weight: 700; color: var(--ink); letter-spacing: 0.04em; }
+  .int-card .int-sub { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-top: 3px; }
+
   /* ===== CTA band ===== */
   .cta-band {
     background: var(--ink); color: var(--white); padding: clamp(56px, 8vw, 96px) 0;
@@ -487,6 +558,7 @@
       <a href="#solutions">Solutions</a>
       <a href="#benefits">Benefits</a>
       <a href="#timeline">Track Record</a>
+      <a href="#security">Security</a>
       <a href="#partner">Partner</a>
       <a class="cta" href="#contact" onclick="openDemoModal(event)">Book a Demo</a>
     </nav>
@@ -723,6 +795,33 @@
   </div>
 </section>
 
+<!-- ================== METRICS BAND ================== -->
+<section class="metrics" id="metrics">
+  <div class="container" data-reveal>
+    <span class="eyebrow">Proof in numbers</span>
+    <h2>The platform <span class="red">in production</span>.</h2>
+    <p class="lede">Real deployments, measurable outcomes, zero security incidents. Numbers from live event cycles.</p>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="num">3M<span class="unit">+</span></div>
+        <div class="label">Assets tracked<br>in production</div>
+      </div>
+      <div class="metric">
+        <div class="num">120<span class="unit">+</span></div>
+        <div class="label">Venues managed<br>across tournaments</div>
+      </div>
+      <div class="metric">
+        <div class="num">50k<span class="unit">+</span></div>
+        <div class="label">Users trained<br>on the platform</div>
+      </div>
+      <div class="metric">
+        <div class="num">0</div>
+        <div class="label">Security incidents<br>since 2020 launch</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================== TIMELINE ================== -->
 <section id="timeline">
   <div class="container" data-reveal>
@@ -781,6 +880,100 @@
         <h3>Ongoing Support</h3>
         <p>Expert consultation throughout the event cycle, not just at onboarding.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================== INTEGRATIONS ================== -->
+<section id="integrations">
+  <div class="container" data-reveal>
+    <span class="eyebrow">Integrations</span>
+    <h2>Plugs into the stack <span class="red">you already use</span>.</h2>
+    <p class="lede">Dedicated API endpoints, standard export formats, and enterprise auth — SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA fits alongside your existing tools instead of replacing them.</p>
+    <div class="int-strip">
+      <div class="int-card">
+        <div class="int-icon" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="32" height="32" rx="4" fill="#F2C811"/><path d="M12 26v-8h3v8h-3zm6 0v-14h3v14h-3zm6 0v-5h3v5h-3z" fill="#1A1A1A"/></svg></div>
+        <div class="int-name">PowerBI</div>
+        <div class="int-sub">Live dashboards</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="32" height="32" rx="4" fill="#107C41"/><path d="M13 13l14 14M27 13L13 27" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="int-name">Excel</div>
+        <div class="int-sub">Export · Import</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="32" height="32" rx="4" fill="#1A1A1A"/><path d="M15 16l-4 4 4 4M25 16l4 4-4 4M22 14l-4 12" stroke="#E50D28" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="int-name">REST API</div>
+        <div class="int-sub">Per-table endpoint</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="32" height="32" rx="4" fill="#E50D28"/><path d="M20 13a5 5 0 0 0-5 5v3h-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1v-3a5 5 0 0 0-5-5zm-3 8v-3a3 3 0 0 1 6 0v3h-6z" fill="#FFFFFF"/></svg></div>
+        <div class="int-name">SSO · OAuth</div>
+        <div class="int-sub">Enterprise auth</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="32" height="32" rx="4" fill="#1F8FFF"/><path d="M10 14h20v2l-10 7-10-7v-2zm0 4l10 7 10-7v8H10v-8z" fill="#FFFFFF"/></svg></div>
+        <div class="int-name">SendGrid</div>
+        <div class="int-sub">Transactional mail</div>
+      </div>
+      <div class="int-card">
+        <div class="int-icon" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="32" height="32" rx="4" fill="#707070"/><path d="M12 14h16v2H12zm0 5h16v2H12zm0 5h16v2H12z" fill="#FFFFFF"/><circle cx="15" cy="15" r="1.2" fill="#E50D28"/><circle cx="15" cy="20" r="1.2" fill="#E50D28"/><circle cx="15" cy="25" r="1.2" fill="#E50D28"/></svg></div>
+        <div class="int-name">SFTP · CSV</div>
+        <div class="int-sub">Bulk feeds</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== SECURITY & COMPLIANCE ================== -->
+<section id="security" class="section-tint">
+  <div class="container" data-reveal>
+    <span class="eyebrow">Security &amp; Compliance</span>
+    <h2>Built to <span class="red">enterprise audit</span> standards.</h2>
+    <p class="lede">Enterprise procurement teams pass SM<sup style="font-size:0.65em;color:var(--red)">2</sup>ARTA without escalations. Hosted in the EU, encrypted end-to-end, audited on every change.</p>
+
+    <div class="sec-grid">
+      <article class="sec-card">
+        <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>EU-Hosted Infrastructure</h3>
+        <p>Data resident in OVH Frankfurt · ISO 27001 certified datacentre · DDoS-protected edge · Cloudflare Pro WAF.</p>
+      </article>
+      <article class="sec-card">
+        <div class="sec-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Encryption Everywhere</h3>
+        <p>TLS 1.2+ in transit · AES-256 at rest · Field-level encryption (CipherSweet / NaCl) · Keys in HashiCorp Vault.</p>
+      </article>
+      <article class="sec-card">
+        <div class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+        <h3>GDPR Compliant</h3>
+        <p>Data processing agreements, right-to-erasure workflows, audit exports. EU data never leaves EU.</p>
+      </article>
+      <article class="sec-card">
+        <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11h6M9 15h4"/></svg></div>
+        <h3>OWASP-Hardened</h3>
+        <p>Cloudflare WAF blocks OWASP Top 10 · ClamAV scans every upload · Monthly vulnerability scans · 72h critical-patch SLA.</p>
+      </article>
+      <article class="sec-card">
+        <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16V8M12 16v-5M17 16v-9"/><circle cx="17" cy="7" r="2"/></svg></div>
+        <h3>Full Audit Trail</h3>
+        <p>Every change attributed, every version recoverable. 4 monitored logging layers · real-time access logs · full traceability.</p>
+      </article>
+      <article class="sec-card">
+        <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>RBAC &amp; Least Privilege</h3>
+        <p>3-tier role-based access · segregation of duties · continuous access reviews · SSO &amp; impersonation audit.</p>
+      </article>
+    </div>
+
+    <div class="sec-badges">
+      <span class="sec-badge"><span class="dot"></span>ISO 27001 Hosting</span>
+      <span class="sec-badge"><span class="dot"></span>GDPR Compliant</span>
+      <span class="sec-badge"><span class="dot"></span>EU Data Residency</span>
+      <span class="sec-badge"><span class="dot"></span>TLS 1.2+ · AES-256</span>
+      <span class="sec-badge"><span class="dot"></span>OWASP Top 10 Blocked</span>
+      <span class="sec-badge"><span class="dot"></span>HashiCorp Vault</span>
+      <span class="sec-badge"><span class="dot"></span>ClamAV File Scanning</span>
+      <span class="sec-badge"><span class="dot"></span>72h Critical SLA</span>
     </div>
   </div>
 </section>
