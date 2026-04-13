@@ -1441,11 +1441,29 @@
       ? '<path d="M6 6l12 12M6 18L18 6"/>'
       : '<path d="M3 7h18M3 12h18M3 17h18"/>';
   }
-  // Close mobile nav on any link tap
+  // Close mobile nav on any link tap — close first, then let the anchor jump resolve cleanly
   document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', () => {
-      if (document.body.classList.contains('nav-open')) toggleNav();
+    a.addEventListener('click', (e) => {
+      if (!document.body.classList.contains('nav-open')) return;
+      const href = a.getAttribute('href') || '';
+      if (href.startsWith('#') && href.length > 1) {
+        e.preventDefault();
+        toggleNav();
+        const target = document.querySelector(href);
+        if (target) {
+          requestAnimationFrame(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', href);
+          });
+        }
+      } else {
+        toggleNav();
+      }
     });
+  });
+  // Safety: ensure nav-open is cleared if viewport crosses desktop breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 960 && document.body.classList.contains('nav-open')) toggleNav();
   });
 
   // Scroll reveal
