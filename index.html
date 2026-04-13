@@ -172,16 +172,14 @@
     transition: background 0.15s ease, transform 0.15s ease;
   }
   .nav-links .cta:hover { background: var(--red-dark); color: var(--white); transform: translateY(-1px); }
-  @media (max-width: 1080px) { .nav-links { gap: 18px; } .nav-links a { font-size: 13px; } }
-
-  /* Mobile hamburger */
+  /* Mobile/tablet hamburger — 11-item nav is too dense for inline layout */
   .nav-toggle {
     display: none; background: none; border: 1px solid var(--line);
     width: 40px; height: 40px; border-radius: 6px; cursor: pointer;
     align-items: center; justify-content: center;
   }
   .nav-toggle svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; }
-  @media (max-width: 960px) {
+  @media (max-width: 1200px) {
     .nav-toggle { display: flex; }
     header .nav { padding: 12px 20px; }
     .nav-links {
@@ -1463,7 +1461,7 @@
   });
   // Safety: ensure nav-open is cleared if viewport crosses desktop breakpoint
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 960 && document.body.classList.contains('nav-open')) toggleNav();
+    if (window.innerWidth > 1200 && document.body.classList.contains('nav-open')) toggleNav();
   });
 
   // Scroll reveal
