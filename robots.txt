@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /deck/
 
-Sitemap: https://www.smmarta.com/sitemap.xml
+Sitemap: https://smmarta.com/sitemap.xml
