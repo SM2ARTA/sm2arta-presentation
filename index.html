@@ -464,10 +464,11 @@
   /* ===== Footer ===== */
   footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 60px 0 32px; }
   .footer-grid {
-    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px;
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 40px;
     padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.12);
   }
-  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  @media (max-width: 1000px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 32px; } }
+  @media (max-width: 620px)  { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
   footer h4 { color: var(--white); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
   footer ul { list-style: none; }
   footer li { padding: 4px 0; }
@@ -1094,16 +1095,26 @@
         <ul>
           <li><a href="#platform">Overview</a></li>
           <li><a href="#features">Features</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#benefits">Benefits</a></li>
           <li><a href="#timeline">Track Record</a></li>
-          <li><a href="#contact">Request Demo Access</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Enterprise</h4>
+        <ul>
+          <li><a href="#integrations">Integrations</a></li>
+          <li><a href="#security">Security &amp; Compliance</a></li>
+          <li><a href="#partner">Partnership</a></li>
+          <li><a href="#video">Walkthrough Video</a></li>
         </ul>
       </div>
       <div>
         <h4>Resources</h4>
         <ul>
-          <li><a href="overview.html">Platform Overview (PDF)</a></li>
-          <li><a href="#partner">Partnership</a></li>
+          <li><a href="overview.html" target="_blank">Platform Overview (PDF)</a></li>
           <li><a href="#contact" onclick="openDemoModal(event)">Book a Demo</a></li>
+          <li><a href="mailto:info@smmarta.com">info@smmarta.com</a></li>
         </ul>
       </div>
       <div>
