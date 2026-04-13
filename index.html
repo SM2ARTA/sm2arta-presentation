@@ -128,7 +128,13 @@
     scroll-margin-top: 72px;
   }
   section [id] { scroll-margin-top: 72px; }
-  @media (max-width: 720px) { section { min-height: auto; } }
+  @media (max-width: 720px) {
+    section { min-height: auto; padding: 64px 0; }
+    section .container { padding: 0 20px; }
+  }
+  @media (max-width: 480px) {
+    section { padding: 52px 0; }
+  }
   .section-tint { background: var(--bg-alt); }
 
   /* ===== Header ===== */
@@ -140,7 +146,11 @@
   }
   .nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 24px; max-width: 1240px; margin: 0 auto;
+    padding: 16px 24px; max-width: 1240px; margin: 0 auto; gap: 12px;
+  }
+  @media (max-width: 560px) {
+    .nav { padding: 14px 18px; }
+    .logo img { height: 28px; }
   }
   .logo {
     display: flex; align-items: center; gap: 14px;
@@ -150,7 +160,7 @@
   .logo sup.tm { color: var(--muted); font-size: 0.42em; margin-left: 2px; font-weight: 600; }
   .logo .accent { width: 32px; height: 3px; background: var(--red); }
 
-  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
   .nav-links a {
     font-weight: 500; font-size: 14px; color: var(--ink-soft);
     transition: color 0.15s ease;
@@ -162,7 +172,36 @@
     transition: background 0.15s ease, transform 0.15s ease;
   }
   .nav-links .cta:hover { background: var(--red-dark); color: var(--white); transform: translateY(-1px); }
-  @media (max-width: 720px) { .nav-links a:not(.cta) { display: none; } }
+  @media (max-width: 1080px) { .nav-links { gap: 18px; } .nav-links a { font-size: 13px; } }
+
+  /* Mobile hamburger */
+  .nav-toggle {
+    display: none; background: none; border: 1px solid var(--line);
+    width: 40px; height: 40px; border-radius: 6px; cursor: pointer;
+    align-items: center; justify-content: center;
+  }
+  .nav-toggle svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; }
+  @media (max-width: 960px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed; top: 70px; left: 0; right: 0; bottom: 0;
+      background: var(--white); flex-direction: column; align-items: stretch;
+      gap: 0; padding: 20px; z-index: 90;
+      transform: translateY(-110%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-top: 1px solid var(--line);
+      overflow-y: auto;
+    }
+    body.nav-open .nav-links { transform: translateY(0); }
+    body.nav-open { overflow: hidden; }
+    .nav-links a {
+      padding: 16px 8px; font-size: 17px; font-weight: 600;
+      border-bottom: 1px solid var(--line); color: var(--ink);
+    }
+    .nav-links .cta {
+      margin-top: 16px; padding: 16px; text-align: center;
+      font-size: 15px; letter-spacing: 0.06em;
+    }
+  }
 
   /* ===== Hero ===== */
   .hero {
@@ -181,6 +220,9 @@
   .hero h1 br { display: block; }
   .hero .lede { font-size: clamp(16px, 1.4vw, 19px); color: var(--ink-soft); margin-bottom: 28px; max-width: 52ch; line-height: 1.55; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  @media (max-width: 560px) {
+    .hero-ctas .btn { flex: 1 1 100%; justify-content: center; }
+  }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 22px; border-radius: 7px; font-weight: 700; font-size: 15px;
@@ -245,6 +287,11 @@
     background: var(--white);
   }
   .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  @media (max-width: 720px) {
+    .trust { padding: 22px 0; }
+    .trust-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .trust-badges { gap: 16px; }
+  }
   .trust-text {
     font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   }
@@ -521,6 +568,10 @@
     padding-top: 24px; display: flex; justify-content: space-between; align-items: center;
     font-size: 12px; letter-spacing: 0.05em; flex-wrap: wrap; gap: 16px;
   }
+  @media (max-width: 620px) {
+    footer { padding: 40px 0 24px; }
+    .footer-bottom { font-size: 11px; text-align: center; justify-content: center; }
+  }
 
   /* ===== Private deck gate ===== */
   .gate {
@@ -571,6 +622,13 @@
     box-shadow: 0 30px 80px rgba(0,0,0,0.3);
     transform: translateY(12px); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     max-height: 92vh; overflow-y: auto;
+  }
+  @media (max-width: 560px) {
+    .modal-backdrop { padding: 0; align-items: flex-end; }
+    .modal { max-height: 95vh; border-radius: 16px 16px 0 0; }
+    .modal-head { padding: 20px 20px 4px; }
+    .modal-body { padding: 12px 20px 22px; }
+    .modal-head h3 { font-size: 19px; }
   }
   .modal-backdrop.open .modal { transform: translateY(0); }
   .modal-head {
@@ -638,6 +696,7 @@
     color: var(--ink); opacity: 0.04;
     pointer-events: none; user-select: none; z-index: 0;
   }
+  @media (max-width: 720px) { .sec-num { font-size: 64px; top: 24px; right: 20px; opacity: 0.05; } }
   section .container { position: relative; z-index: 2; }
 
   /* ===== Hero word-by-word reveal ===== */
@@ -716,6 +775,9 @@
       <img src="assets/sign.svg" alt="SM2ARTA" height="36">
       <span class="accent"></span>
     </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleNav()">
+      <svg id="nav-toggle-icon" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
     <nav class="nav-links" aria-label="Primary">
       <a href="#platform">Platform</a>
       <a href="#features">Features</a>
@@ -899,7 +961,7 @@
 
     <div class="vs-grid">
       <div class="vs-col-head classic">The Classical Way</div>
-      <div class="vs-col-head sm">With SM<sup style="font-size:0.65em;">2</sup>ARTA</div>
+      <div class="vs-col-head sm">With SM&#xB2;ARTA</div>
 
       <div class="vs-row-left">
         <span class="vs-icon x" aria-hidden="true"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg></span>
@@ -1337,6 +1399,23 @@
 </div>
 
 <script>
+  // Mobile nav toggle
+  function toggleNav() {
+    const open = document.body.classList.toggle('nav-open');
+    const btn = document.querySelector('.nav-toggle');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    const icon = document.getElementById('nav-toggle-icon');
+    icon.innerHTML = open
+      ? '<path d="M6 6l12 12M6 18L18 6"/>'
+      : '<path d="M3 7h18M3 12h18M3 17h18"/>';
+  }
+  // Close mobile nav on any link tap
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (document.body.classList.contains('nav-open')) toggleNav();
+    });
+  });
+
   // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
