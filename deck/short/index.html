@@ -50,6 +50,22 @@
   #start-demo-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.24); }
   #start-demo-btn svg { width: 14px; height: 14px; fill: #E50D28; stroke: #E50D28; stroke-width: 1.5; }
 
+  #fullscreen-btn {
+    background: #FFFFFF; color: #1A1A1A; border: 1px solid #E5E5E5;
+    padding: 10px 16px; border-radius: 6px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 8px; height: 38px; box-sizing: border-box;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  #fullscreen-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  #fullscreen-btn svg { width: 16px; height: 16px; stroke: #E50D28; fill: none; stroke-width: 2; }
+  @media print { #fullscreen-btn { display: none !important; } }
+  body.print-pdf #fullscreen-btn { display: none !important; }
+  /* Hide the button while in fullscreen — Esc still exits */
+  :fullscreen #fullscreen-btn { display: none; }
+  :-webkit-full-screen #fullscreen-btn { display: none; }
+
   #save-pdf-btn {
     height: 38px; box-sizing: border-box;
     background: #E50D28; color: #FFFFFF; border: none;
@@ -94,6 +110,10 @@
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     START DEMO
   </a>
+  <button id="fullscreen-btn" title="Enter full-screen mode (press Esc to exit)" onclick="togglePresentationFullscreen()">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V3h4M21 7V3h-4M3 17v4h4M21 17v4h-4"/></svg>
+    FULL SCREEN
+  </button>
   <button id="save-pdf-btn" title="Open print-ready view and save as PDF" onclick="savePresentationAsPDF()">
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     SAVE AS PDF
@@ -718,6 +738,17 @@ Reveal.initialize({
   center: false,
   pdfSeparateFragments: false,
 });
+
+function togglePresentationFullscreen() {
+  var inFs = document.fullscreenElement || document.webkitFullscreenElement;
+  if (inFs) {
+    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    return;
+  }
+  var el = document.documentElement;
+  var req = el.requestFullscreen || el.webkitRequestFullscreen;
+  if (req) req.call(el);
+}
 
 function savePresentationAsPDF() {
   if (window.location.search.match(/print-pdf/gi)) {
