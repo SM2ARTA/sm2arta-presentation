@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SM2ARTA — FIFA Senior Leadership Briefing</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<script>
+  if (window.location.search.match(/print-pdf/gi)) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet'; link.type = 'text/css';
+    link.href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/css/print/pdf.css';
+    document.head.appendChild(link);
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  body, html { margin: 0; padding: 0; background: #fff; font-family: 'DM Sans', sans-serif; }
+  .reveal .slides { text-align: left; }
+  .reveal .slides section { padding: 0 !important; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; }
+  .reveal .slides section svg { width: 100%; height: 100%; max-width: 1280px; max-height: 720px; display: block; }
+  .reveal .slide-background { background: #EDEDED !important; }
+  .reveal .progress { color: #E50D28; height: 3px; }
+  .reveal .progress span { background: #E50D28 !important; }
+  .reveal .controls { color: #E50D28 !important; }
+  .reveal .slide-number { display: none; }
+  svg text { font-family: 'DM Sans', sans-serif; fill: #1A1A1A; }
+  svg .muted { fill: #707070; }
+  svg .red { fill: #E50D28; }
+  .fo-body { font-family: 'DM Sans', sans-serif; color: #333; }
+  .fo-body .red { color: #E50D28; font-weight: 700; }
+  .fo-body strong { color: #1A1A1A; }
+
+  #toolbar {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  @media print { #toolbar { display: none !important; } }
+
+  #start-demo-btn {
+    background: #1A1A1A; color: #FFFFFF; border: none;
+    padding: 10px 16px; border-radius: 6px; text-decoration: none;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 8px; height: 38px; box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  #start-demo-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.24); }
+  #start-demo-btn svg { width: 14px; height: 14px; fill: #E50D28; stroke: #E50D28; stroke-width: 1.5; }
+
+  #save-pdf-btn {
+    height: 38px; box-sizing: border-box;
+    background: #E50D28; color: #FFFFFF; border: none;
+    padding: 10px 16px; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.06em; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(229, 13, 40, 0.3);
+    display: flex; align-items: center; gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  #save-pdf-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(229, 13, 40, 0.4); }
+  #save-pdf-btn svg { width: 16px; height: 16px; stroke: #FFFFFF; fill: none; stroke-width: 2; }
+  @media print { #save-pdf-btn { display: none !important; } }
+  body.print-pdf #save-pdf-btn { display: none !important; }
+
+  @keyframes smFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .reveal .slides section.present > svg > * {
+    animation: smFadeIn 0.55s ease-out both;
+    animation-delay: 0.35s;
+  }
+  .reveal .slides section.present > svg > rect:first-of-type,
+  .reveal .slides section.present > svg > use[href="#hdr"] {
+    animation: none;
+    opacity: 1;
+  }
+  .reveal .slides section.present > svg > text[y="128"] { animation-delay: 0.15s; }
+  .reveal .slides section.present > svg > text[y="178"] { animation-delay: 0.30s; }
+  .reveal .slides section.present > svg > rect[y="198"] { animation-delay: 0.50s; }
+  .reveal .slides section.present > svg > text[y="228"] { animation-delay: 0.60s; }
+  .reveal .slides section.present > svg > g.ctxbar      { animation-delay: 0.90s; }
+  .reveal .slides section.present > svg > g[transform*="1210, 660"] { animation-delay: 1.05s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal .slides section.present > svg > * { animation: none !important; opacity: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="toolbar">
+  <a id="start-demo-btn" href="https://demo.smmarta.com/" target="_blank" rel="noopener" title="Open the live SM2ARTA demo">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    START DEMO
+  </a>
+  <button id="save-pdf-btn" title="Open print-ready view and save as PDF" onclick="savePresentationAsPDF()">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    SAVE AS PDF
+  </button>
+</div>
+
+<!-- Shared SVG defs -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2.2" cy="2.2" r="2.2" fill="#E50D28"/>
+    </pattern>
+
+    <g id="hdr">
+      <image href="../media/image1.png" x="60" y="42" width="108" height="22"/>
+      <rect x="185" y="51" width="42" height="4" fill="#E50D28"/>
+      <text x="245" y="62" font-size="16" font-weight="500" font-family="DM Sans" fill="#1A1A1A">2026</text>
+      <rect x="1050" y="44" width="160" height="64" fill="url(#dots)"/>
+    </g>
+
+    <g id="slnum">
+      <path d="M 0 0 L 36 0 L 36 38 L 12 38 L 0 26 Z" fill="#E50D28"/>
+    </g>
+
+    <!-- Lucide-style icons -->
+    <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></symbol>
+    <symbol id="i-container" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7.7c0-.6-.4-1.2-.8-1.5l-6.3-3.9a1.72 1.72 0 0 0-1.7 0l-10.3 6c-.5.2-.9.8-.9 1.4v6.6c0 .5.4 1.2.8 1.5l6.3 3.9a1.72 1.72 0 0 0 1.7 0l10.3-6c.5-.3.9-1 .9-1.5Z"/><path d="M10 21.9V14L2.1 9.1"/><path d="m10 14 11.9-6.9"/><path d="M14 19.8v-8.1"/><path d="M18 17.5V9.4"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+    <symbol id="i-bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16V8M12 16v-5M17 16v-9"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></symbol>
+
+    <!-- Footer chip icons (cover frame) -->
+    <symbol id="ft-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a2 2 0 0 1 2-2h11l-3 6 3 6H6"/></symbol>
+    <symbol id="ft-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="ft-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- ==================== 1. TITLE (OPENING FRAME) ==================== -->
+<section data-background-color="#FFFFFF">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <use href="#hdr"/>
+
+  <!-- Hero right -->
+  <circle cx="950" cy="400" r="290" fill="#F2F2F2"/>
+  <image href="../media/image2.png" x="700" y="160" width="500" height="500" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Brand block -->
+  <text x="60" y="180" font-size="38" font-weight="800" letter-spacing="-0.02em">SM<tspan baseline-shift="super" font-size="22">2</tspan>ARTA<tspan baseline-shift="super" font-size="15" dx="2" fill="#707070" font-weight="600">&#8482;</tspan></text>
+  <text x="60" y="212" font-size="11" class="muted" font-weight="600" letter-spacing="0.14em">SYSTEM FOR MATERIALS MANAGEMENT AND ASSET TRACKING</text>
+
+  <!-- Main title -->
+  <text x="60" y="320" font-size="42" font-weight="800" letter-spacing="-0.015em">EVENTS MATERIAL PLANNING</text>
+  <text x="60" y="370" font-size="42" font-weight="800" letter-spacing="-0.015em">&amp; <tspan fill="#E50D28">ASSET MANAGEMENT</tspan></text>
+
+  <rect x="60" y="445" width="540" height="1" fill="#E6E6E6"/>
+
+  <!-- Three-column stats block -->
+  <text x="60" y="510" font-size="34" font-weight="800" fill="#E50D28">6+</text>
+  <text x="60" y="534" font-size="10" class="muted" font-weight="700" letter-spacing="0.16em">YEARS IN PRODUCTION</text>
+
+  <text x="245" y="510" font-size="34" font-weight="800" fill="#E50D28">FWC22</text>
+  <text x="245" y="534" font-size="10" class="muted" font-weight="700" letter-spacing="0.16em">PROVEN</text>
+
+  <text x="445" y="510" font-size="34" font-weight="800" fill="#E50D28">FWC26</text>
+  <text x="445" y="534" font-size="10" class="muted" font-weight="700" letter-spacing="0.16em">DEPLOYED</text>
+
+</svg>
+</section>
+
+<!-- ==================== 2. WHAT IS SM2ARTA ==================== -->
+<section data-background-color="#FFFFFF">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <circle cx="1180" cy="-80" r="220" fill="#FCE6E9" opacity="0.4"/>
+  <use href="#hdr"/>
+
+  <text x="60" y="128" font-size="11" font-weight="700" fill="#E50D28" letter-spacing="0.24em">THE PLATFORM</text>
+  <text x="60" y="178" font-size="50" font-weight="800" letter-spacing="-0.015em">WHAT IS <tspan fill="#E50D28">SM<tspan baseline-shift="super" font-size="28">2</tspan>ARTA</tspan><tspan baseline-shift="super" font-size="20" dx="2" fill="#999" font-weight="600">&#8482;</tspan>?</text>
+  <rect x="60" y="198" width="72" height="3" fill="#E50D28"/>
+
+  <foreignObject x="60" y="240" width="900" height="120">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:18px;line-height:1.55;color:#333">
+      A <strong>secure online platform</strong> where every team plans, tracks, and reconciles event materials and assets &mdash; in one place, from first plan to final return.
+    </div>
+  </foreignObject>
+
+  <!-- Three fact cards: bigger icons, plainer titles, no operator labels -->
+  <g transform="translate(60, 410)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="370" height="200" rx="12" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="200" fill="#E50D28"/>
+      <circle cx="60" cy="60" r="36" fill="#E50D28"/>
+      <g transform="translate(40, 40)" color="#FFFFFF"><use href="#i-db" width="40" height="40"/></g>
+      <text x="22" y="135" font-size="20" font-weight="800" fill="#1A1A1A">One shared system</text>
+      <foreignObject x="22" y="148" width="330" height="46">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.5">Every team works on the same data &mdash; no spreadsheets, no version conflicts.</div>
+      </foreignObject>
+    </g>
+
+    <g transform="translate(395, 0)">
+      <rect x="0" y="0" width="370" height="200" rx="12" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="200" fill="#E50D28"/>
+      <circle cx="60" cy="60" r="36" fill="#E50D28"/>
+      <g transform="translate(40, 40)" color="#FFFFFF"><use href="#i-cloud" width="40" height="40"/></g>
+      <text x="22" y="135" font-size="20" font-weight="800" fill="#1A1A1A">Access from anywhere</text>
+      <foreignObject x="22" y="148" width="330" height="46">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.5">Web browser on any device &mdash; office, warehouse, or venue.</div>
+      </foreignObject>
+    </g>
+
+    <g transform="translate(790, 0)">
+      <rect x="0" y="0" width="370" height="200" rx="12" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="200" fill="#E50D28"/>
+      <circle cx="60" cy="60" r="36" fill="#E50D28"/>
+      <g transform="translate(40, 40)" color="#FFFFFF"><use href="#i-rotate" width="40" height="40"/></g>
+      <text x="22" y="135" font-size="20" font-weight="800" fill="#1A1A1A">Plan to dissolution</text>
+      <foreignObject x="22" y="148" width="330" height="46">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.5">The full event lifecycle &mdash; one workflow from planning to close-out.</div>
+      </foreignObject>
+    </g>
+  </g>
+
+  <g class="ctxbar">
+    <rect x="60" y="650" width="1160" height="1" fill="#EEEEEE"/>
+    <text x="60" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700">Online database</text>
+    <text x="395" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="640" y="687" font-size="13" font-family="DM Sans" fill="#707070" font-weight="400" text-anchor="middle">Web-based SaaS platform</text>
+    <text x="885" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="1180" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700" text-anchor="end">Full event lifecycle</text>
+  </g>
+  <g transform="translate(1210, 660)"><use href="#slnum"/><text x="18" y="26" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text></g>
+</svg>
+</section>
+
+<!-- ==================== 3. PLATFORM HISTORY ==================== -->
+<section data-background-color="#FFFFFF">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <use href="#hdr"/>
+
+  <text x="60" y="128" font-size="11" font-weight="700" fill="#E50D28" letter-spacing="0.22em">TIMELINE</text>
+  <text x="60" y="178" font-size="48" font-weight="800" letter-spacing="-0.015em">PLATFORM <tspan fill="#E50D28">HISTORY</tspan></text>
+  <rect x="60" y="198" width="72" height="3" fill="#E50D28"/>
+  <text x="60" y="228" font-size="13" class="muted">Built between two World Cups, tested at one, deployed at the next</text>
+
+  <!-- Horizontal year axis with three milestones -->
+  <g transform="translate(60, 320)">
+
+    <!-- Axis line -->
+    <line x1="40" y1="40" x2="1120" y2="40" stroke="#E6E6E6" stroke-width="2"/>
+    <line x1="40" y1="40" x2="1080" y2="40" stroke="#1A1A1A" stroke-width="2"/>
+
+    <!-- Year ticks -->
+    <g>
+      <line x1="60" y1="32" x2="60" y2="48" stroke="#1A1A1A" stroke-width="2"/>
+      <text x="60" y="22" font-size="11" font-weight="700" fill="#999999" text-anchor="middle" letter-spacing="0.1em">2018</text>
+
+      <line x1="540" y1="32" x2="540" y2="48" stroke="#1A1A1A" stroke-width="2"/>
+      <text x="540" y="22" font-size="11" font-weight="700" fill="#999999" text-anchor="middle" letter-spacing="0.1em">2022</text>
+
+      <line x1="1020" y1="32" x2="1020" y2="48" stroke="#E50D28" stroke-width="3"/>
+      <text x="1020" y="22" font-size="11" font-weight="800" fill="#E50D28" text-anchor="middle" letter-spacing="0.1em">2026</text>
+    </g>
+
+    <!-- Card 1: FWC18 → FWC22 -->
+    <g transform="translate(0, 80)">
+      <rect x="0" y="0" width="360" height="200" rx="10" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="3" height="200" fill="#1A1A1A"/>
+      <text x="24" y="44" font-size="18" font-weight="800" fill="#1A1A1A">FWC18 &rarr; FWC22</text>
+      <text x="24" y="92" font-size="20" font-weight="700" fill="#1A1A1A">Designed with</text>
+      <text x="24" y="118" font-size="20" font-weight="700" fill="#1A1A1A">innovation in mind</text>
+      <foreignObject x="24" y="138" width="312" height="60">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.55">Developed between two World Cups as a small tool &mdash; purpose-built for event logistics.</div>
+      </foreignObject>
+    </g>
+
+    <!-- Card 2: FWC22 -->
+    <g transform="translate(380, 80)">
+      <rect x="0" y="0" width="360" height="200" rx="10" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="3" height="200" fill="#1A1A1A"/>
+      <text x="24" y="44" font-size="18" font-weight="800" fill="#1A1A1A">FWC22</text>
+      <text x="24" y="92" font-size="20" font-weight="700" fill="#1A1A1A">Tested at the FIFA</text>
+      <text x="24" y="118" font-size="20" font-weight="700" fill="#1A1A1A">World Cup in Qatar</text>
+      <foreignObject x="24" y="138" width="312" height="60">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.55">Operated end-to-end at FIFA World Cup 2022 &mdash; validated under live tournament conditions.</div>
+      </foreignObject>
+    </g>
+
+    <!-- Card 3: FWC26 (active — single red accent stripe) -->
+    <g transform="translate(760, 80)">
+      <rect x="0" y="0" width="360" height="200" rx="10" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="3" height="200" fill="#E50D28"/>
+      <text x="24" y="44" font-size="18" font-weight="800" fill="#1A1A1A">FWC26</text>
+      <text x="24" y="92" font-size="20" font-weight="700" fill="#1A1A1A">The major test:</text>
+      <text x="24" y="118" font-size="20" font-weight="700" fill="#1A1A1A">most complex project</text>
+      <foreignObject x="24" y="138" width="312" height="60">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.55">Currently undergoing the largest test in its history &mdash; modernized, deployed, operating live at scale.</div>
+      </foreignObject>
+    </g>
+
+  </g>
+
+  <g class="ctxbar">
+    <rect x="60" y="650" width="1160" height="1" fill="#EEEEEE"/>
+    <text x="60" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700">Built for FWC22</text>
+    <text x="395" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="640" y="687" font-size="13" font-family="DM Sans" fill="#707070" font-weight="400" text-anchor="middle">Tested in production</text>
+    <text x="885" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="1180" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700" text-anchor="end">Live at FWC26</text>
+  </g>
+  <g transform="translate(1210, 660)"><use href="#slnum"/><text x="18" y="26" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text></g>
+</svg>
+</section>
+
+<!-- ==================== 4. MATERIAL PLANNING PROCESS ==================== -->
+<section data-background-color="#FFFFFF">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <use href="#hdr"/>
+
+  <text x="60" y="128" font-size="11" font-weight="700" fill="#E50D28" letter-spacing="0.22em">WORKFLOW</text>
+  <text x="60" y="178" font-size="48" font-weight="800" letter-spacing="-0.015em">MATERIAL PLANNING <tspan fill="#E50D28">PROCESS</tspan></text>
+  <rect x="60" y="198" width="72" height="3" fill="#E50D28"/>
+  <text x="60" y="228" font-size="13" class="muted">The full lifecycle covered by SM<tspan baseline-shift="super" font-size="9">2</tspan>ARTA<tspan baseline-shift="super" font-size="7" dx="1">&#8482;</tspan> &mdash; from setting to dissolution</text>
+
+  <!-- Top labels (even circles: 02, 04, 06) -->
+  <g transform="translate(60, 280)">
+    <g transform="translate(200, 0)">
+      <text x="80" y="0" font-size="13" font-weight="800" fill="#1A1A1A" text-anchor="middle" letter-spacing="0.05em">SCOPING</text>
+      <text x="80" y="22" font-size="11" fill="#707070" text-anchor="middle">Planners scope requirements</text>
+      <foreignObject x="-20" y="34" width="200" height="50">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:11px;color:#1A1A1A;font-weight:600;line-height:1.45;text-align:center">Straightforward interface &mdash; easy to start.</div>
+      </foreignObject>
+    </g>
+    <g transform="translate(540, 0)">
+      <text x="80" y="0" font-size="13" font-weight="800" fill="#1A1A1A" text-anchor="middle" letter-spacing="0.05em">BUMP-IN</text>
+      <text x="80" y="22" font-size="11" fill="#707070" text-anchor="middle">Plan per venue</text>
+      <foreignObject x="-20" y="34" width="200" height="50">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:11px;color:#1A1A1A;font-weight:600;line-height:1.45;text-align:center">The most challenging stage of operations, simplified.</div>
+      </foreignObject>
+    </g>
+    <g transform="translate(880, 0)">
+      <text x="80" y="0" font-size="13" font-weight="800" fill="#1A1A1A" text-anchor="middle" letter-spacing="0.05em">BUMP-OUT</text>
+      <text x="80" y="22" font-size="11" fill="#707070" text-anchor="middle">Assets, labels, delivery notes</text>
+      <foreignObject x="-20" y="34" width="200" height="50">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:11px;color:#1A1A1A;font-weight:600;line-height:1.45;text-align:center">Chaos under control.</div>
+      </foreignObject>
+    </g>
+  </g>
+
+  <!-- Bar + 7 circles -->
+  <g transform="translate(60, 400)">
+    <rect x="110" y="25" width="1020" height="18" rx="9" fill="#E50D28"/>
+    <g transform="translate(80, 0)">
+      <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#E50D28" stroke-width="5"/>
+      <circle cx="30" cy="35" r="24" fill="#E50D28"/>
+      <text x="30" y="42" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">01</text>
+    </g>
+    <g transform="translate(250, 0)">
+      <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#E50D28" stroke-width="5"/>
+      <circle cx="30" cy="35" r="24" fill="#E50D28"/>
+      <text x="30" y="42" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">02</text>
+    </g>
+    <g transform="translate(420, 0)">
+      <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#E50D28" stroke-width="5"/>
+      <circle cx="30" cy="35" r="24" fill="#E50D28"/>
+      <text x="30" y="42" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">03</text>
+    </g>
+    <g transform="translate(590, 0)">
+      <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#E50D28" stroke-width="5"/>
+      <circle cx="30" cy="35" r="24" fill="#E50D28"/>
+      <text x="30" y="42" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">04</text>
+    </g>
+    <g transform="translate(760, 0)">
+      <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#E50D28" stroke-width="5"/>
+      <circle cx="30" cy="35" r="24" fill="#E50D28"/>
+      <text x="30" y="42" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">05</text>
+    </g>
+    <g transform="translate(930, 0)">
+      <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#E50D28" stroke-width="5"/>
+      <circle cx="30" cy="35" r="24" fill="#E50D28"/>
+      <text x="30" y="42" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">06</text>
+    </g>
+    <g transform="translate(1100, 0)">
+      <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#E50D28" stroke-width="5"/>
+      <circle cx="30" cy="35" r="24" fill="#E50D28"/>
+      <text x="30" y="42" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">07</text>
+    </g>
+  </g>
+
+  <!-- Bottom labels (odd: 1, 3, 5, 7) -->
+  <g transform="translate(60, 520)">
+    <g transform="translate(30, 0)">
+      <text x="80" y="0" font-size="13" font-weight="800" fill="#1A1A1A" text-anchor="middle" letter-spacing="0.05em">SETTING</text>
+      <text x="80" y="22" font-size="11" fill="#707070" text-anchor="middle">Event content and settings</text>
+      <foreignObject x="-20" y="34" width="200" height="50">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:11px;color:#1A1A1A;font-weight:600;line-height:1.45;text-align:center">Fully customizable to event needs.</div>
+      </foreignObject>
+    </g>
+    <g transform="translate(370, 0)">
+      <text x="80" y="0" font-size="13" font-weight="800" fill="#1A1A1A" text-anchor="middle" letter-spacing="0.05em">REVIEW</text>
+      <text x="80" y="22" font-size="11" fill="#707070" text-anchor="middle">Review and confirm planning</text>
+      <foreignObject x="-20" y="34" width="200" height="50">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:11px;color:#1A1A1A;font-weight:600;line-height:1.45;text-align:center">Built-in tools, plus BI integration.</div>
+      </foreignObject>
+    </g>
+    <g transform="translate(710, 0)">
+      <text x="80" y="0" font-size="13" font-weight="800" fill="#1A1A1A" text-anchor="middle" letter-spacing="0.05em">OPERATIONS</text>
+      <text x="80" y="22" font-size="11" fill="#707070" text-anchor="middle">Supply chain to destinations</text>
+      <foreignObject x="-20" y="34" width="200" height="50">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:11px;color:#1A1A1A;font-weight:600;line-height:1.45;text-align:center">Every asset tracked, every team aligned.</div>
+      </foreignObject>
+    </g>
+    <g transform="translate(1050, 0)">
+      <text x="80" y="0" font-size="13" font-weight="800" fill="#E50D28" text-anchor="middle" letter-spacing="0.05em">DISSOLUTION</text>
+      <text x="80" y="22" font-size="11" fill="#707070" text-anchor="middle">Reconcile, return, close-out</text>
+      <foreignObject x="-20" y="34" width="200" height="50">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:11px;color:#1A1A1A;font-weight:600;line-height:1.45;text-align:center">Asset register visible to all stakeholders.</div>
+      </foreignObject>
+    </g>
+  </g>
+
+  <g class="ctxbar">
+    <rect x="60" y="650" width="1160" height="1" fill="#EEEEEE"/>
+    <text x="60" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700">7 stages</text>
+    <text x="395" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="640" y="687" font-size="13" font-family="DM Sans" fill="#707070" font-weight="400" text-anchor="middle">Setting to dissolution</text>
+    <text x="885" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="1180" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700" text-anchor="end">Full lifecycle in one system</text>
+  </g>
+  <g transform="translate(1210, 660)"><use href="#slnum"/><text x="18" y="26" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text></g>
+</svg>
+</section>
+
+<!-- ==================== 5. TECHNICAL FOUNDATION & SECURITY ==================== -->
+<section data-background-color="#FFFFFF">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <use href="#hdr"/>
+
+  <text x="60" y="128" font-size="11" font-weight="700" fill="#E50D28" letter-spacing="0.22em">TECHNICAL FOUNDATION</text>
+  <text x="60" y="178" font-size="48" font-weight="800" letter-spacing="-0.015em">ARCHITECTURE &amp; <tspan fill="#E50D28">SECURITY</tspan></text>
+  <rect x="60" y="198" width="72" height="3" fill="#E50D28"/>
+  <text x="60" y="228" font-size="13" class="muted">From a small tool to enterprise-level controls</text>
+
+  <!-- Two-column section: Stack (left) + Security controls (right) -->
+  <text x="60" y="268" font-size="10" font-weight="700" fill="#999999" letter-spacing="0.2em">STACK</text>
+  <text x="660" y="268" font-size="10" font-weight="700" fill="#E50D28" letter-spacing="0.2em">SECURITY CONTROLS</text>
+
+  <!-- LEFT: Stack rows -->
+  <g transform="translate(60, 288)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FAFAFA"/>
+      <rect x="16" y="11" width="28" height="28" rx="6" fill="#FCE6E9"/>
+      <g transform="translate(20, 15)" color="#E50D28"><use href="#i-code" width="20" height="20"/></g>
+      <text x="60" y="25" font-size="13" font-weight="700">Back-end</text>
+      <text x="60" y="42" font-size="12" class="muted">PHP 8.1 &middot; Laravel 10</text>
+    </g>
+    <g transform="translate(0, 60)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FAFAFA"/>
+      <rect x="16" y="11" width="28" height="28" rx="6" fill="#FCE6E9"/>
+      <g transform="translate(20, 15)" color="#E50D28"><use href="#i-db" width="20" height="20"/></g>
+      <text x="60" y="25" font-size="13" font-weight="700">Database</text>
+      <text x="60" y="42" font-size="12" class="muted">PostgreSQL 12 &middot; encrypted SSD storage</text>
+    </g>
+    <g transform="translate(0, 120)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FAFAFA"/>
+      <rect x="16" y="11" width="28" height="28" rx="6" fill="#FCE6E9"/>
+      <g transform="translate(20, 15)" color="#E50D28"><use href="#i-container" width="20" height="20"/></g>
+      <text x="60" y="25" font-size="13" font-weight="700">Containerization</text>
+      <text x="60" y="42" font-size="12" class="muted">Dockerized services &middot; NGINX &middot; Linux Ubuntu</text>
+    </g>
+    <g transform="translate(0, 180)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FAFAFA"/>
+      <rect x="16" y="11" width="28" height="28" rx="6" fill="#FCE6E9"/>
+      <g transform="translate(20, 15)" color="#E50D28"><use href="#i-globe" width="20" height="20"/></g>
+      <text x="60" y="25" font-size="13" font-weight="700">Hosting</text>
+      <text x="60" y="42" font-size="12" class="muted">OVH Cloud &middot; Frankfurt &middot; ISO/IEC 27001 &middot; GDPR</text>
+    </g>
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FAFAFA"/>
+      <rect x="16" y="11" width="28" height="28" rx="6" fill="#FCE6E9"/>
+      <g transform="translate(20, 15)" color="#E50D28"><use href="#i-bar" width="20" height="20"/></g>
+      <text x="60" y="25" font-size="13" font-weight="700">Operations</text>
+      <text x="60" y="42" font-size="12" class="muted">CI/CD pipelines &middot; monthly patches &middot; daily backups</text>
+    </g>
+  </g>
+
+  <!-- Vertical divider -->
+  <rect x="640" y="278" width="1" height="320" fill="#EEEEEE"/>
+
+  <!-- RIGHT: Security controls -->
+  <g transform="translate(660, 288)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FCE6E9"/>
+      <rect x="0" y="0" width="4" height="50" fill="#E50D28"/>
+      <rect x="20" y="11" width="28" height="28" rx="6" fill="#FFFFFF"/>
+      <g transform="translate(24, 15)" color="#E50D28"><use href="#i-shield" width="20" height="20"/></g>
+      <text x="64" y="25" font-size="13" font-weight="700">Edge protection</text>
+      <text x="64" y="42" font-size="12" class="muted">Cloudflare Pro WAF &middot; DDoS mitigation &middot; OWASP Top 10</text>
+    </g>
+    <g transform="translate(0, 60)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FCE6E9"/>
+      <rect x="0" y="0" width="4" height="50" fill="#E50D28"/>
+      <rect x="20" y="11" width="28" height="28" rx="6" fill="#FFFFFF"/>
+      <g transform="translate(24, 15)" color="#E50D28"><use href="#i-lock" width="20" height="20"/></g>
+      <text x="64" y="25" font-size="13" font-weight="700">Encryption</text>
+      <text x="64" y="42" font-size="12" class="muted">TLS 1.2+ in transit &middot; AES-256 at rest &middot; CipherSweet/NaCl</text>
+    </g>
+    <g transform="translate(0, 120)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FCE6E9"/>
+      <rect x="0" y="0" width="4" height="50" fill="#E50D28"/>
+      <rect x="20" y="11" width="28" height="28" rx="6" fill="#FFFFFF"/>
+      <g transform="translate(24, 15)" color="#E50D28"><use href="#i-key" width="20" height="20"/></g>
+      <text x="64" y="25" font-size="13" font-weight="700">Key management</text>
+      <text x="64" y="42" font-size="12" class="muted">HashiCorp Vault &middot; key-based SSH &middot; no public admin</text>
+    </g>
+    <g transform="translate(0, 180)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FCE6E9"/>
+      <rect x="0" y="0" width="4" height="50" fill="#E50D28"/>
+      <rect x="20" y="11" width="28" height="28" rx="6" fill="#FFFFFF"/>
+      <g transform="translate(24, 15)" color="#E50D28"><use href="#i-users" width="20" height="20"/></g>
+      <text x="64" y="25" font-size="13" font-weight="700">Access control</text>
+      <text x="64" y="42" font-size="12" class="muted">3-tier RBAC &middot; segregation of duties &middot; impersonation audit</text>
+    </g>
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="560" height="50" rx="6" fill="#FCE6E9"/>
+      <rect x="0" y="0" width="4" height="50" fill="#E50D28"/>
+      <rect x="20" y="11" width="28" height="28" rx="6" fill="#FFFFFF"/>
+      <g transform="translate(24, 15)" color="#E50D28"><use href="#i-eye" width="20" height="20"/></g>
+      <text x="64" y="25" font-size="13" font-weight="700">Logging &amp; scanning</text>
+      <text x="64" y="42" font-size="12" class="muted">4 monitored layers &middot; ClamAV file scanning &middot; 24/7 uptime</text>
+    </g>
+  </g>
+
+  <g class="ctxbar">
+    <rect x="60" y="650" width="1160" height="1" fill="#EEEEEE"/>
+    <text x="60" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700">Open-source stack</text>
+    <text x="395" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="640" y="687" font-size="13" font-family="DM Sans" fill="#707070" font-weight="400" text-anchor="middle">Layered security controls</text>
+    <text x="885" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="1180" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700" text-anchor="end">Auditable by design</text>
+  </g>
+  <g transform="translate(1210, 660)"><use href="#slnum"/><text x="18" y="26" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text></g>
+</svg>
+</section>
+
+<!-- ==================== 6. WHY SM2ARTA ==================== -->
+<section data-background-color="#FFFFFF">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <use href="#hdr"/>
+
+  <text x="60" y="128" font-size="11" font-weight="700" fill="#E50D28" letter-spacing="0.22em">WHAT YOU GET</text>
+  <text x="60" y="178" font-size="48" font-weight="800" letter-spacing="-0.015em">MORE THAN A <tspan fill="#E50D28">SYSTEM</tspan></text>
+  <rect x="60" y="198" width="72" height="3" fill="#E50D28"/>
+  <text x="60" y="228" font-size="13" class="muted">SM<tspan baseline-shift="super" font-size="9">2</tspan>ARTA<tspan baseline-shift="super" font-size="7" dx="1">&#8482;</tspan> brings the platform &mdash; and the people, methods, and lessons behind it</text>
+
+  <!-- 2x2 grid of equal cards -->
+  <g transform="translate(60, 270)">
+
+    <!-- Top-left: SYSTEM -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="570" height="170" rx="12" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="170" fill="#E50D28"/>
+      <circle cx="60" cy="60" r="32" fill="#E50D28"/>
+      <g transform="translate(42, 42)" color="#FFFFFF"><use href="#i-db" width="36" height="36"/></g>
+      <text x="22" y="120" font-size="20" font-weight="800" fill="#1A1A1A">The system</text>
+      <foreignObject x="22" y="128" width="510" height="46">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.6">A working platform &mdash; ready to use, fully configured, no need to build from scratch.</div>
+      </foreignObject>
+    </g>
+
+    <!-- Top-right: METHODOLOGY -->
+    <g transform="translate(590, 0)">
+      <rect x="0" y="0" width="570" height="170" rx="12" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="170" fill="#E50D28"/>
+      <circle cx="60" cy="60" r="32" fill="#E50D28"/>
+      <g transform="translate(42, 42)" color="#FFFFFF"><use href="#i-rotate" width="36" height="36"/></g>
+      <text x="22" y="120" font-size="20" font-weight="800" fill="#1A1A1A">The methodology</text>
+      <foreignObject x="22" y="128" width="510" height="46">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.6">A proven way of working &mdash; operational logic baked into how the platform is run.</div>
+      </foreignObject>
+    </g>
+
+    <!-- Bottom-left: EXPERIENCE -->
+    <g transform="translate(0, 190)">
+      <rect x="0" y="0" width="570" height="170" rx="12" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="170" fill="#E50D28"/>
+      <circle cx="60" cy="60" r="32" fill="#E50D28"/>
+      <g transform="translate(42, 42)" color="#FFFFFF"><use href="#i-bar" width="36" height="36"/></g>
+      <text x="22" y="120" font-size="20" font-weight="800" fill="#1A1A1A">The experience</text>
+      <foreignObject x="22" y="128" width="510" height="46">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.6">Six-plus years of live events &mdash; lessons from real operations, not theory.</div>
+      </foreignObject>
+    </g>
+
+    <!-- Bottom-right: COMPREHENSIVE SOLUTION -->
+    <g transform="translate(590, 190)">
+      <rect x="0" y="0" width="570" height="170" rx="12" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="170" fill="#E50D28"/>
+      <circle cx="60" cy="60" r="32" fill="#E50D28"/>
+      <g transform="translate(42, 42)" color="#FFFFFF"><use href="#i-shield" width="36" height="36"/></g>
+      <text x="22" y="120" font-size="20" font-weight="800" fill="#1A1A1A">A comprehensive solution</text>
+      <foreignObject x="22" y="128" width="510" height="46">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:13px;color:#707070;line-height:1.6">Setup, installation, training, and ongoing support &mdash; everything needed end-to-end.</div>
+      </foreignObject>
+    </g>
+
+  </g>
+
+  <g class="ctxbar">
+    <rect x="60" y="650" width="1160" height="1" fill="#EEEEEE"/>
+    <text x="60" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700">System &amp; methodology</text>
+    <text x="395" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="640" y="687" font-size="13" font-family="DM Sans" fill="#707070" font-weight="400" text-anchor="middle">Experience from real events</text>
+    <text x="885" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="1180" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700" text-anchor="end">A comprehensive solution</text>
+  </g>
+  <g transform="translate(1210, 660)"><use href="#slnum"/><text x="18" y="26" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text></g>
+</svg>
+</section>
+
+<!-- ==================== 7. DEMO (STATEMENT) ==================== -->
+<section data-background-color="#FFFFFF">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <use href="#hdr"/>
+
+  <text x="60" y="128" font-size="11" font-weight="700" fill="#E50D28" letter-spacing="0.22em">DEMO</text>
+  <text x="60" y="178" font-size="48" font-weight="800" letter-spacing="-0.015em">SEE IT IN <tspan fill="#E50D28">ACTION</tspan></text>
+  <rect x="60" y="198" width="72" height="3" fill="#E50D28"/>
+  <text x="60" y="228" font-size="13" class="muted">Live walkthrough of the working SM<tspan baseline-shift="super" font-size="9">2</tspan>ARTA<tspan baseline-shift="super" font-size="7" dx="1">&#8482;</tspan> system</text>
+
+  <!-- Main composed panel -->
+  <g transform="translate(60, 280)">
+
+    <!-- Left side: message -->
+    <foreignObject x="0" y="0" width="640" height="200">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="fo-body" style="font-size:36px;line-height:1.25;color:#1A1A1A;font-weight:800;letter-spacing:-0.01em">
+        Switching to the<br>
+        <span style="color:#E50D28">live system</span> now.
+      </div>
+    </foreignObject>
+
+    <!-- Demo URL pill -->
+    <g transform="translate(0, 220)">
+      <rect x="0" y="0" width="640" height="80" rx="10" fill="#FAFAFA"/>
+      <rect x="0" y="0" width="4" height="80" fill="#E50D28"/>
+      <text x="24" y="28" font-size="10" font-weight="700" fill="#999999" letter-spacing="0.2em">DEMO ENVIRONMENT</text>
+      <text x="24" y="60" font-size="24" font-weight="800" fill="#1A1A1A">demo.smmarta.com</text>
+    </g>
+
+  </g>
+
+  <!-- Right: stylized browser frame with play icon -->
+  <g transform="translate(770, 270)">
+    <!-- Browser shadow -->
+    <rect x="6" y="6" width="430" height="280" rx="14" fill="#000000" opacity="0.04"/>
+    <!-- Browser body -->
+    <rect x="0" y="0" width="430" height="280" rx="14" fill="#FFFFFF" stroke="#E6E6E6" stroke-width="1"/>
+    <!-- Browser top bar -->
+    <rect x="0" y="0" width="430" height="38" rx="14" fill="#FAFAFA"/>
+    <rect x="0" y="24" width="430" height="14" fill="#FAFAFA"/>
+    <!-- Window dots -->
+    <circle cx="22" cy="19" r="5" fill="#FF5F57"/>
+    <circle cx="40" cy="19" r="5" fill="#FEBC2E"/>
+    <circle cx="58" cy="19" r="5" fill="#28C840"/>
+    <!-- URL bar -->
+    <rect x="80" y="10" width="320" height="18" rx="9" fill="#FFFFFF" stroke="#E6E6E6"/>
+    <text x="96" y="23" font-size="10" font-weight="500" fill="#707070">demo.smmarta.com</text>
+
+    <!-- Play button centered in browser -->
+    <circle cx="215" cy="160" r="58" fill="#FCE6E9"/>
+    <circle cx="215" cy="160" r="42" fill="#E50D28"/>
+    <g transform="translate(193, 138)" color="#FFFFFF"><use href="#i-play" width="44" height="44"/></g>
+  </g>
+
+  <g class="ctxbar">
+    <rect x="60" y="650" width="1160" height="1" fill="#EEEEEE"/>
+    <text x="60" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700">Live system</text>
+    <text x="395" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="640" y="687" font-size="13" font-family="DM Sans" fill="#707070" font-weight="400" text-anchor="middle">Walkthrough in production environment</text>
+    <text x="885" y="687" font-size="14" font-family="DM Sans" fill="#D4D4D4" font-weight="400" text-anchor="middle">→</text>
+    <text x="1180" y="687" font-size="13" font-family="DM Sans" fill="#1A1A1A" font-weight="700" text-anchor="end">Open for discussion</text>
+  </g>
+  <g transform="translate(1210, 660)"><use href="#slnum"/><text x="18" y="26" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text></g>
+</svg>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  width: 1280,
+  height: 720,
+  margin: 0.02,
+  minScale: 0.2,
+  maxScale: 2.0,
+  transition: 'slide',
+  transitionSpeed: 'default',
+  backgroundTransition: 'fade',
+  controls: true,
+  progress: true,
+  center: false,
+  pdfSeparateFragments: false,
+});
+
+function savePresentationAsPDF() {
+  if (window.location.search.match(/print-pdf/gi)) {
+    window.print();
+    return;
+  }
+  var url = window.location.pathname + '?print-pdf' + window.location.hash;
+  var w = window.open(url, '_blank');
+  if (!w) {
+    alert('Please allow pop-ups to save as PDF, then try again.');
+    return;
+  }
+  w.addEventListener('load', function () {
+    setTimeout(function () { w.print(); }, 1500);
+  });
+}
+</script>
+</body>
+</html>
